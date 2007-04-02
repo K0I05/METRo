@@ -88,7 +88,7 @@ Become root and
 
    4. To verify your installation, in the directory
 
-       path_to_metro/bin
+       path_to_metro/usr/bin
 
       do this command
 
@@ -96,6 +96,6 @@ Become root and
 
       if the file
 
-       path_to_metro/data/roadcast/roadcast_selftest.xml
+       path_to_metro/usr/share/metro/data/roadcast/roadcast_selftest.xml
 
       was created successfully, your installation is working.
