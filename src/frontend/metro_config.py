@@ -344,7 +344,7 @@ def save_command_line_parameter( lArgv, sShort_opt, lLong_opt ):
 
         if o in ("-h", "--help"):
             sMetro_root_path = metro_util.get_metro_root_path()
-            sMetro_man_path = sMetro_root_path + "/doc/metro.1"
+            sMetro_man_path = sMetro_root_path + "/usr/share/man/man1/metro.1"
             print _("see man page: 'man %s'") % sMetro_man_path
             sys.exit()
 
@@ -392,16 +392,16 @@ def save_command_line_parameter( lArgv, sShort_opt, lLong_opt ):
 
             dConf['FILE_FORECAST_IN_FILENAME'] = \
                 metro_util.get_metro_root_path() +\
-                "/data/forecast/forecast_selftest.xml"
+                "/usr/share/metro/data/forecast/forecast_selftest.xml"
             dConf['FILE_OBSERVATION_FILENAME'] = \
                 metro_util.get_metro_root_path() +\
-                "/data/observation/observation_selftest.xml" 
+                "/usr/share/metro/data/observation/observation_selftest.xml" 
             dConf['FILE_STATION_FILENAME'] = \
                  metro_util.get_metro_root_path() +\
-                "/data/station/station_selftest.xml" 
+                "/usr/share/metro/data/station/station_selftest.xml" 
             dConf['FILE_ROADCAST_FILENAME'] = \
                  metro_util.get_metro_root_path() +\
-                "/data/roadcast/roadcast_selftest.xml"
+                "/usr/share/metro/data/roadcast/roadcast_selftest.xml"
             dConf['INIT_LOGGER_VERBOSE_LEVEL'] = \
                 metro_logger.LOGGER_VERBOSE_LEVEL_DEBUG
 
@@ -532,7 +532,7 @@ def set_default_value( ):
          'COMMENTS':_("current version for METRo configuration file")}
 
     dConfig['FILE_LOGGER_FILENAME'] = \
-        {'VALUE'   :"log_metro",
+        {'VALUE'   :metro_util.get_metro_root_path() + "/var/log/metro.log",
          'FROM'    :CFG_HARDCODED,
          'COMMENTS':_("logger filename")}
 

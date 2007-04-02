@@ -150,7 +150,6 @@ else
 #    if [ ! -d $installation_dir/usr/share/metro/model ]; then
 #        mkdir  $installation_dir/usr/share/metro/model
 #    fi
-    touch $installation_dir/usr/share/metro/model/__init__.py
     cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/usr/share/metro/model/_macadam.so
     cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/usr/share/metro/model/macadam.py
 fi

@@ -32,7 +32,7 @@ Documentation can be found online at:
 http://documentation.wikia.com/wiki/METRo
 
 == Installing METRo ==
-See man page in metro/doc/ directory.
+See man page in metro/usr/share/man/man1/ directory.
 METRo uses needs the following software:
 * python 2.3 or +
 * g77

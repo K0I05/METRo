@@ -89,7 +89,7 @@ def generate_dtd_catalog( ):
     sCatalog += "\n"
 
     sMetro_root_path = metro_util.get_metro_root_path()
-    sMetro_catalog_path = sMetro_root_path + "/data/DTD/"
+    sMetro_catalog_path = sMetro_root_path + "/usr/share/metro/data/DTD/"
 
     sCatalog += genxml_public_catalog_entry(
         "-//Apple Computer//DTD PLIST 1.0//EN",
