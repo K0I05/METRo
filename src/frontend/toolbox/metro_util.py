@@ -85,9 +85,12 @@ def get_metro_root_path( ):
         sRoot_path = string.join(lPath[:-2],"/")
     elif lPath[len(lPath)-1] == "bin":
         sRoot_path = string.join(lPath[:-1],"/")
+    elif lPath[len(lPath)-1] == "metro":
+        sRoot_path = string.join(lPath[:-3],"/")
+        
     else:
         sError = _("The executable 'metro.py' must be in one of the following directory:\n") +\
-                 _("metro_directory/src/frontend' or 'metro_directory/bin'.\n") +\
+                 _("metro_directory/src/frontend' or 'metro_directory/usr/lib/metro'.\n") +\
                  _("The following path is not valid: '%s'.\n\n") % (sys.path[0]) +\
                  _("Aborting execution of METRo.\n")
         print sError
@@ -103,7 +106,7 @@ def get_exec_root_path( ):
 # Ca permet de definir le underscore pour la traduction avec gettext.
 #########
 t = gettext.translation('metro_util', get_exec_root_path() +\
-                        '/locale')
+                        '/../locale')
 _ = t.gettext
     
 
@@ -632,7 +635,7 @@ def validate_version_number(sVersion, sMin_version, sMax_version ):
 #####################################################
 def init_translation(sFilename):
     t = gettext.translation(sFilename, get_exec_root_path() +\
-                            '/locale')
+                            '/../locale')
     _t_ = t.gettext
 
     return _t_
