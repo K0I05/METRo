@@ -39,6 +39,8 @@ trap 'echo -e $ERRMSG; exit 1' ERR
 
 progname=`basename $0`
 
+# Making sure we are in the directory where the script resides
+cd `dirname $0`
 installation_dir=`pwd`
 
 metro_dir=metro
@@ -145,12 +147,12 @@ if [ $bCompile == 1 ]; then
     cd $installation_dir
 else
     echo "* Use provided binary for physic model"
-    if [ ! -d $installation_dir/src/frontend/model ]; then
-        mkdir  $installation_dir/src/frontend/model
-    fi
-    touch $installation_dir/src/frontend/model/__init__.py
-    cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/src/frontend/model/_macadam.so
-    cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/src/frontend/model/macadam.py
+#    if [ ! -d $installation_dir/usr/share/metro/model ]; then
+#        mkdir  $installation_dir/usr/share/metro/model
+#    fi
+    touch $installation_dir/usr/share/metro/model/__init__.py
+    cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/usr/share/metro/model/_macadam.so
+    cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/usr/share/metro/model/macadam.py
 fi
 
 echo ""
@@ -159,23 +161,41 @@ mkdir -p $destination_path
 echo ""
 echo "* Copying METRo files..."
 echo ""
-echo "* Copying METRo programs files to: "$destination_path/bin
-cp -r src/frontend $destination_path/bin
+#echo "* Copying METRo programs files to: "$destination_path/bin
+#cp -r src/frontend $destination_path/bin
 
-echo  "* Copying METRo data exemples to: "$destination_path/data
-cp -r data $destination_path/
+echo  "* Copying METRo data files to: "$destination_path/usr
+cp -r usr $destination_path/
 
-#echo  "* Copying METRo external lib to: "$destination_path/bin/external_lib/
-#cp lib/* $destination_path/bin/external_lib/
+echo "* Copying METRo programs files to: "$destination_path/usr/share/metro
+cp  src/frontend/*.py $destination_path/usr/share/metro
+cp -r src/frontend/data_module $destination_path/usr/share/metro
+cp -r src/frontend/executable_module $destination_path/usr/share/metro
+cp -r src/frontend/external_lib $destination_path/usr/share/metro
+cp -r src/frontend/toolbox $destination_path/usr/share/metro
 
-echo  "* Copying METRo documentation to: "$destination_path/doc
-cp -r doc $destination_path/
+echo "* Copying METRo model python file to: "$destination_path/usr/share/metro/model
+cp src/model/macadam.py $destination_path/usr/share/metro/model/
+
+echo "* Copying METRo model to: "$destination_path/usr/lib/metro
+cp src/model/_macadam.so $destination_path/usr/lib/metro/
+
+echo "* Copying METRo locale files to: "$destination_path/usr/share/locale
+cp src/frontend/locale/fr/LC_MESSAGES/*.mo $destination_path/usr/share/locale/fr/LC_MESSAGES
+cp src/frontend/locale/en/LC_MESSAGES/*.mo $destination_path/usr/share/locale/en/LC_MESSAGES
+
+echo "* Creating METRo log directory: "$destination_path/var/log
+mkdir -p $destination_path/var/log
+
+echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
+cp INSTALL LICENSE README changelog-FHS.txt $destination_path/usr/share/doc/metro
+
 
 cd $installation_dir
 
-echo "* Changing name of METRo executable:"
-echo "  $destination_path/bin/metro.py -> $destination_path/bin/metro"
-mv $destination_path/bin/metro.py $destination_path/bin/metro  
+echo "* Make link to METRo executable:"
+echo "  $destination_path/usr/bin/metro -> $destination_path/usr/share/metro/metro.py"
+ln -s $destination_path/usr/share/metro/metro.py $destination_path/usr/bin/metro  
 
 echo ""
 echo "---------------------------------------------------"
@@ -187,10 +207,10 @@ echo ""
 echo "To test the installation of METRo"
 echo "---------------------------------"
 echo "Go into the METRo directory:"
-echo " 'cd $destination_path/bin/'" 
+echo " 'cd $destination_path/usr/bin/'" 
 echo "Launch METRo selftest:"
 echo " 'python metro --selftest'"
 echo "Compare the files:"
-echo " 'diff ../data/roadcast/roadcast_selftest.xml ../data/roadcast/roadcast_selftest_reference.xml'"
+echo " 'diff ../share/metro/data/roadcast/roadcast_selftest.xml ../share/metro/data/roadcast/roadcast_selftest_reference.xml'"
 echo "They should be identical except for the production-date."
 
