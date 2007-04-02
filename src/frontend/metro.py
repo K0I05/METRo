@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # -*- coding: iso-8859-15 -*-
 #
 # METRo : Model of the Environment and Temperature of Roads
