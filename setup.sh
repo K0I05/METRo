@@ -150,8 +150,8 @@ else
 #    if [ ! -d $installation_dir/usr/share/metro/model ]; then
 #        mkdir  $installation_dir/usr/share/metro/model
 #    fi
-    cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/usr/share/metro/model/_macadam.so
-    cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/usr/share/metro/model/macadam.py
+    cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/src/model/_macadam.so
+    cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/src/model/macadam.py
 fi
 
 echo ""
@@ -179,15 +179,15 @@ cp src/model/macadam.py $destination_path/usr/share/metro/model/
 echo "* Copying METRo model to: "$destination_path/usr/lib/metro
 cp src/model/_macadam.so $destination_path/usr/lib/metro/
 
-echo "* Copying METRo locale files to: "$destination_path/usr/share/locale
-cp src/frontend/locale/fr/LC_MESSAGES/*.mo $destination_path/usr/share/locale/fr/LC_MESSAGES
-cp src/frontend/locale/en/LC_MESSAGES/*.mo $destination_path/usr/share/locale/en/LC_MESSAGES
+#echo "* Copying METRo locale files to: "$destination_path/usr/share/locale
+#cp src/frontend/locale/fr/LC_MESSAGES/*.mo $destination_path/usr/share/locale/fr/LC_MESSAGES
+#cp src/frontend/locale/en/LC_MESSAGES/*.mo $destination_path/usr/share/locale/en/LC_MESSAGES
 
 echo "* Creating METRo log directory: "$destination_path/var/log
 mkdir -p $destination_path/var/log
 
 echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
-cp INSTALL LICENSE README changelog-FHS.txt $destination_path/usr/share/doc/metro
+cp INSTALL LICENSE README $destination_path/usr/share/doc/metro
 
 
 cd $installation_dir

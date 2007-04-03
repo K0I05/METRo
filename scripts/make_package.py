@@ -34,6 +34,15 @@
 #
 #
 
+
+#
+# Every file in the source directories is listed separatly so that we don't 
+# include unwanted files.  This way, we are forced to consider what goes in the 
+# package and what doesn't each time we make modifications. We don't blindly 
+# add a directory with all the temporary and test files and it helps us to keep
+# clean the distribution package.
+#
+
 sPackage_list = \
               """
 src/frontend/metro.py
@@ -106,10 +115,6 @@ src/frontend/external_lib/Plist_config/__init__.py
 src/frontend/external_lib/Plist_config/plist_reader.py
 src/frontend/external_lib/Plist_config/plist_writer.py
 src/frontend/external_lib/fpconst.py
-src/frontend/external_lib/_numpy.so
-src/frontend/external_lib/arrayfns.so
-
-src/frontend/locale
 
 src/model/array2matrix.f
 src/model/balanc.f
@@ -129,15 +134,18 @@ src/model/number.h
 src/model/_macadam.so.prebuilt
 src/model/macadam.py.prebuilt
 
-doc
-
-data
-
+scripts/check_translation.py
+scripts/copy_msgid_msgstr.py
+scripts/create_mo.py
 scripts/do_macadam
+scripts/make_package.py
+
+usr
 
 README
 LICENSE
 INSTALL
+setup.sh
 
 """
 
@@ -216,16 +224,12 @@ sPackage_list = sPackage_list + " "
 sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 
-# copy setup.sh in root of package
-#shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/scripts/setup.sh",
-#              sRoot_path + "/" + sSvn_root_dir + "/")
 # copy model binary to lib
 shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/src/frontend/model/_macadam.so",
               sRoot_path + "/" + sSvn_root_dir + "/src/model/_macadam.so.prebuilt")
 shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/src/frontend/model/macadam.py",
               sRoot_path + "/" + sSvn_root_dir + "/src/model/macadam.py.prebuilt")
 
-sPackage_list = sPackage_list + sSvn_root_dir + "/setup.sh "
 
 #tar command
 sTarCommand = "tar cjvf " +  sPackage_path + "/metro-" + sVersion_number + \
@@ -246,9 +250,6 @@ os.system(sSignCommand)
 
 # cleanup
 print "\n* Cleanup *"
-
-print "remove '%s'" % (sRoot_path + "/" + sSvn_root_dir + "/setup.sh")
-os.remove(sRoot_path + "/" + sSvn_root_dir + "/setup.sh")
 
 print ""
 print 
