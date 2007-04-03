@@ -106,7 +106,7 @@ def get_exec_root_path( ):
 # Ca permet de definir le underscore pour la traduction avec gettext.
 #########
 t = gettext.translation('metro_util', get_exec_root_path() +\
-                        '/../locale')
+                        '/../../usr/share/locale')
 _ = t.gettext
     
 
@@ -635,7 +635,7 @@ def validate_version_number(sVersion, sMin_version, sMax_version ):
 #####################################################
 def init_translation(sFilename):
     t = gettext.translation(sFilename, get_exec_root_path() +\
-                            '/../locale')
+                            '/../../usr/share/locale')
     _t_ = t.gettext
 
     return _t_
