@@ -54,8 +54,15 @@ sys.stdout = codecs.lookup('ISO-8859-1')[-1](sys.stdout)
 
 # ajout du repertoire a la liste de repertoire
 # dans lequelle on peut faire un import
-pathInclude = sys.path[0] + '/external_lib' # a cause de arrayfns et _numpy
+pathInclude = sys.path[0] + '/external_lib' # a cause de Plist_config/PListReader.py
 sys.path.append(pathInclude)
+
+pathInclude = sys.path[0] + '/../../lib/metro/external_lib' # a cause de arrayfns et _numpy
+sys.path.append(pathInclude)
+
+pathInclude = sys.path[0] + '/../../lib/metro' # a cause de _macadam
+sys.path.append(pathInclude)
+
 pathInclude = sys.path[0] + '/executable_module'
 sys.path.append(pathInclude)
 

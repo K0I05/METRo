@@ -217,8 +217,8 @@ sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 
 # copy setup.sh in root of package
-shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/scripts/setup.sh",
-              sRoot_path + "/" + sSvn_root_dir + "/")
+#shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/scripts/setup.sh",
+#              sRoot_path + "/" + sSvn_root_dir + "/")
 # copy model binary to lib
 shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/src/frontend/model/_macadam.so",
               sRoot_path + "/" + sSvn_root_dir + "/src/model/_macadam.so.prebuilt")
