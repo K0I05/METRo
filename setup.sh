@@ -46,6 +46,7 @@ installation_dir=`pwd`
 metro_dir=metro
 
 bCompile=0
+sVerbose=""
 
 # 'getopts' processes command line args to script.
 
@@ -63,11 +64,12 @@ if [ -z $1 ]
 # Exit and complain if no argument(s) given.
 then
     echo ""
-    echo "Usage: $progname [-c] destination_path"
+    echo "Usage: $progname [OPTION] destination_path"
     echo ""
     echo "-c  : Will compile the METRo physic model instead of using"
-    echo "      the provided binary. Need gfortran compiler."  
-    echo ""      
+    echo "      the provided binary. Need gfortran compiler."
+    echo ""
+    echo "-v  : Verbose"
     echo ""
     echo "The metro directory will be created in the destination_path"
     echo ""
@@ -77,15 +79,18 @@ then
 fi  
 
 
-while getopts "c" Option
+while getopts "cv" Option
 do
   case $Option in
     c     ) bCompile=1;;
+    v     ) sVerbose=-v;;
     *     ) echo ""
-            echo "Usage: $progname [-c] destination_path"
+            echo "Usage: $progname [OPTION] destination_path"
             echo ""
             echo "-c  : Will compile the METRo physic model instead of using"
-            echo "      the provided binary. Need gfortran compiler."  
+            echo "      the provided binary. Need gfortran compiler." 
+ 	    echo ""
+	    echo "-v  : Verbose"
             echo ""
             echo "The metro directory will be created in the destination_path"
             echo ""
@@ -124,12 +129,13 @@ if ! locate libgfortran.so.1; then
     echo "Could not find gfortran library on your system."
     echo "METRo model will be recompiled."
     echo "----------------------------------------------------------"
-    echo ""
     bCompile=1
 fi
+echo ""
     
 
 if [ $bCompile == 1 ]; then
+    echo "* Building physic model..."
     if [ ! -n "$PYTHON_INCLUDE" ] ; then
         echo "----------------------------------------------------------"
         echo "WARNING!"
@@ -147,54 +153,51 @@ if [ $bCompile == 1 ]; then
     cd $installation_dir
 else
     echo "* Use provided binary for physic model"
-#    if [ ! -d $installation_dir/usr/share/metro/model ]; then
-#        mkdir  $installation_dir/usr/share/metro/model
-#    fi
-    cp $installation_dir/src/model/_macadam.so.prebuilt $installation_dir/src/model/_macadam.so
-    cp $installation_dir/src/model/macadam.py.prebuilt $installation_dir/src/model/macadam.py
 fi
-
 echo ""
+
 echo "* Creating destination directory: "$destination_path
 mkdir -p $destination_path
 echo ""
 echo "* Copying METRo files..."
 echo ""
-#echo "* Copying METRo programs files to: "$destination_path/bin
-#cp -r src/frontend $destination_path/bin
 
 echo  "* Copying METRo data files to: "$destination_path/usr
-cp -r usr $destination_path/
+find usr -not -regex ".*\.po" | cpio -pmud --quiet $sVerbose $destination_path/
 
 echo "* Copying METRo programs files to: "$destination_path/usr/share/metro
-cp  src/frontend/*.py $destination_path/usr/share/metro
-cp -r src/frontend/data_module $destination_path/usr/share/metro
-cp -r src/frontend/executable_module $destination_path/usr/share/metro
-cp -r src/frontend/external_lib $destination_path/usr/share/metro
-cp -r src/frontend/toolbox $destination_path/usr/share/metro
+cp $sVerbose src/frontend/*.py $destination_path/usr/share/metro
+cp $sVerbose -r src/frontend/data_module $destination_path/usr/share/metro
+cp $sVerbose -r src/frontend/executable_module $destination_path/usr/share/metro
+cp $sVerbose -r src/frontend/external_lib $destination_path/usr/share/metro
+cp $sVerbose -r src/frontend/toolbox $destination_path/usr/share/metro
 
 echo "* Copying METRo model python file to: "$destination_path/usr/share/metro/model
-cp src/model/macadam.py $destination_path/usr/share/metro/model/
+if [ $bCompile == 1 ]; then
+    cp $sVerbose src/model/macadam.py          $destination_path/usr/share/metro/model/
+else
+    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
+fi
 
 echo "* Copying METRo model to: "$destination_path/usr/lib/metro
-cp src/model/_macadam.so $destination_path/usr/lib/metro/
+if [ $bCompile == 1 ]; then
+    cp $sVerbose src/model/_macadam.so $destination_path/usr/lib/metro/
+else
+    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
+fi
 
-#echo "* Copying METRo locale files to: "$destination_path/usr/share/locale
-#cp src/frontend/locale/fr/LC_MESSAGES/*.mo $destination_path/usr/share/locale/fr/LC_MESSAGES
-#cp src/frontend/locale/en/LC_MESSAGES/*.mo $destination_path/usr/share/locale/en/LC_MESSAGES
+echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
+cp $sVerbose INSTALL LICENSE README $destination_path/usr/share/doc/metro/
 
 echo "* Creating METRo log directory: "$destination_path/var/log
 mkdir -p $destination_path/var/log
-
-echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
-cp INSTALL LICENSE README $destination_path/usr/share/doc/metro
 
 
 cd $installation_dir
 
 echo "* Make link to METRo executable:"
 echo "  $destination_path/usr/bin/metro -> $destination_path/usr/share/metro/metro.py"
-ln -s $destination_path/usr/share/metro/metro.py $destination_path/usr/bin/metro  
+ln -sf ../share/metro/metro.py $destination_path/usr/bin/metro  
 
 echo ""
 echo "---------------------------------------------------"

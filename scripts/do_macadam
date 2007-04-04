@@ -38,7 +38,7 @@ METRO_VERSION=3.0.4
 
 
 if [[ $1 = clean ]]; then    
-    echo "Cleaning last METro model build attempt if necessary..."
+    echo "* Cleaning last METro model build attempt if necessary..."
     rm -f _macadam.so *.o macadam.py macadam_wrap.c
     exit 0
 fi
@@ -49,7 +49,7 @@ error.  Correct error and restart.\n\n"
 
 trap 'echo -e $ERRMSG; exit 1' ERR
 
-echo "Building METRo $METRO_VERSION model"
+echo "* Building METRo $METRO_VERSION model"
 
 if [ -n "$PYTHON_INCLUDE" ] ; then
     if [ ! -d $PYTHON_INCLUDE ]; then
@@ -71,14 +71,14 @@ else
     echo ""
     PYTHON_INC="-I/usr/include/python2.3/"
 fi
-echo "Python include path = "$PYTHON_INC
+echo "    Python include path = "$PYTHON_INC
 
 
-echo "Using SWIG"
-echo 'macadam.i :'
+echo "    Using SWIG"
+echo '    macadam.i :'
 swig -python  macadam.i 
 
-echo "C compilation"
+echo "    C compilation"
 gcc -c -fPIC macadam.c macadam_wrap.c $PYTHON_INC
 
 if [ -z $FC ]; then
@@ -97,18 +97,20 @@ if [ -z $FC ]; then
     fi
 fi
 
-echo "Fortran compilation"
+echo "    Fortran compilation"
 $FC -Wall -Wsurprising -W -c -fPIC lib_gen.f grille.f array2matrix.f initial.f coupla.f lib_therm.f flxsurfz.f balanc.f constPhys.f 
 
 
-echo "Link"
+echo "    Link"
 $FC -shared macadam.o macadam_wrap.o  lib_gen.o  grille.o array2matrix.o initial.o coupla.o lib_therm.o flxsurfz.o balanc.o constPhys.o  -lc -o _macadam.so
 
 
-echo "Copying .so in ../frontend/model"
+echo "    Copying .so in ../frontend/model"
 if [ ! -d ../frontend/model ]; then
     mkdir ../frontend/model
 fi
 touch ../frontend/model/__init__.py
 cp _macadam.so ../frontend/model
 cp macadam.py ../frontend/model
+
+
