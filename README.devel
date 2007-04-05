@@ -1,0 +1,30 @@
+                      METRo Developer README file
+
+You are currently reading the Developer README file. For general information
+about METRo please read the "README" file.
+
+== Important thing to know ==
+
+init_devel.sh
+-------------
+You need to run the 'init_devel.sh' script to prepare your working directory. 
+If the script complain about the environment variable "PYTHON_INCLUDE": 
+you need to set it to a valid value. Usualy, it will be something like:
+'export PYTHON_INCLUDE=/usr/include/pythonX.X' where the X's are the 
+version numbers. You only need to run the 'init_devel.sh' script one time.
+
+* From now on, we assume the 'init_devel.sh' script has already been run.
+
+Fortran model
+-------------
+To compile the Fortran model you will need to perform the following action:
+1) cd src/model/
+2) ../../script/do_macadam
+
+make_package.py
+---------------
+To build a package you need to:
+1) compile the Fortran model (see Fortran model)
+2) cd script/
+3) ./make_package.py
+
