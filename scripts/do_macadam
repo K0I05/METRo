@@ -105,12 +105,10 @@ echo "    Link"
 $FC -shared macadam.o macadam_wrap.o  lib_gen.o  grille.o array2matrix.o initial.o coupla.o lib_therm.o flxsurfz.o balanc.o constPhys.o  -lc -o _macadam.so
 
 
-echo "    Copying .so in ../frontend/model"
-if [ ! -d ../frontend/model ]; then
-    mkdir ../frontend/model
-fi
-touch ../frontend/model/__init__.py
-cp _macadam.so ../frontend/model
-cp macadam.py ../frontend/model
-
+echo "    Copying .so in usr/share/metro/model"
+#if [ ! -d ../../usr/share/metro/model ]; then
+#    mkdir ../../usr/share/metro/model
+#fi
+cp _macadam.so ../../usr/lib/metro/
+cp macadam.py ../../usr/share/metro/model/
 

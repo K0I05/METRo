@@ -133,7 +133,8 @@ if ! locate libgfortran.so.1; then
 fi
 echo ""
     
-
+mkdir -p $destination_path/usr/share/metro/model/
+mkdir -p $destination_path/usr/lib/metro/
 if [ $bCompile == 1 ]; then
     echo "* Building physic model..."
     if [ ! -n "$PYTHON_INCLUDE" ] ; then
@@ -153,6 +154,8 @@ if [ $bCompile == 1 ]; then
     cd $installation_dir
 else
     echo "* Use provided binary for physic model"
+    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
+    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
 fi
 echo ""
 
@@ -172,19 +175,19 @@ cp $sVerbose -r src/frontend/executable_module $destination_path/usr/share/metro
 cp $sVerbose -r src/frontend/external_lib $destination_path/usr/share/metro
 cp $sVerbose -r src/frontend/toolbox $destination_path/usr/share/metro
 
-echo "* Copying METRo model python file to: "$destination_path/usr/share/metro/model
-if [ $bCompile == 1 ]; then
-    cp $sVerbose src/model/macadam.py          $destination_path/usr/share/metro/model/
-else
-    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
-fi
+#echo "* Copying METRo model python file to: "$destination_path/usr/share/metro/model
+#if [ $bCompile == 1 ]; then
+#    cp $sVerbose src/model/macadam.py          $destination_path/usr/share/metro/model/
+#else
+#    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
+#fi
 
-echo "* Copying METRo model to: "$destination_path/usr/lib/metro
-if [ $bCompile == 1 ]; then
-    cp $sVerbose src/model/_macadam.so $destination_path/usr/lib/metro/
-else
-    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
-fi
+#echo "* Copying METRo model to: "$destination_path/usr/lib/metro
+#if [ $bCompile == 1 ]; then
+#    cp $sVerbose src/model/_macadam.so $destination_path/usr/lib/metro/
+#else
+#    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
+#fi
 
 echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
 cp $sVerbose INSTALL LICENSE README $destination_path/usr/share/doc/metro/

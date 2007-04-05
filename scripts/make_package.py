@@ -225,9 +225,9 @@ sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
 
 # copy model binary to lib
-shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/src/frontend/model/_macadam.so",
+shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/usr/lib/metro/_macadam.so",
               sRoot_path + "/" + sSvn_root_dir + "/src/model/_macadam.so.prebuilt")
-shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/src/frontend/model/macadam.py",
+shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/usr/share/metro/model/macadam.py",
               sRoot_path + "/" + sSvn_root_dir + "/src/model/macadam.py.prebuilt")
 
 
