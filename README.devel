@@ -19,7 +19,7 @@ Fortran model
 -------------
 To compile the Fortran model you will need to perform the following action:
 1) cd src/model/
-2) ../../script/do_macadam
+2) ../../scripts/do_macadam
 
 make_package.py
 ---------------
