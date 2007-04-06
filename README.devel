@@ -3,7 +3,10 @@
 You are currently reading the Developer README file. For general information
 about METRo please read the "README" file.
 
-== Important thing to know ==
+
+========================================
+== Setting up development environment ==
+========================================
 
 init_devel.sh
 -------------
@@ -13,7 +16,12 @@ you need to set it to a valid value. Usualy, it will be something like:
 'export PYTHON_INCLUDE=/usr/include/pythonX.X' where the X's are the 
 version numbers. You only need to run the 'init_devel.sh' script one time.
 
-* From now on, we assume the 'init_devel.sh' script has already been run.
+* From now on, we assume the 'init_devel.sh' script has been run.
+
+
+=======================
+== Compiling "model" ==
+=======================
 
 Fortran model
 -------------
@@ -21,10 +29,24 @@ To compile the Fortran model you will need to perform the following action:
 1) cd src/model/
 2) ../../scripts/do_macadam
 
-make_package.py
----------------
-To build a package you need to:
-1) compile the Fortran model (see Fortran model)
-2) cd script/
-3) ./make_package.py
 
+======================
+== Building package ==
+======================
+
+1) Change the METRo version number in the following files:
+    README
+    scripts/do_macadam
+    src/frontend/metro_config.py
+
+2) Change realease date in the following files:
+    README
+    src/frontend/metro_config.py
+
+2) Compile model:
+    compile the Fortran model (see == Compiling "model" ==)
+
+3) Build Package
+    cd script/ 
+    ./make_package.py
+    * You need a valid gpg key to be able to sign your package
