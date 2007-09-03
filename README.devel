@@ -47,6 +47,6 @@ To compile the Fortran model you will need to perform the following action:
     compile the Fortran model (see == Compiling "model" ==)
 
 3) Build Package
-    cd script/ 
+    cd scripts/ 
     ./make_package.py
     * You need a valid gpg key to be able to sign your package
