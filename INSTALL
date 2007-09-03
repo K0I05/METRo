@@ -10,7 +10,7 @@ http://documentation.wikia.com/wiki/METRo
 To run METRo, you will need the following software packages:
 
     * python 2.3
-    * g77
+    * gfortran
     * SWIG
     * Package python numarray version 0.9
     * libxml2 (see further for the right version)
@@ -21,7 +21,7 @@ To run METRo, you will need the following software packages:
 
 === Red hat | Mandriva | Debian (Knoppix, Ubuntu and other Debian based) ===
 
-   1. Install g77;
+   1. Install gfortran;
    2. Be sure that you have python 2.3.0 or +.
    3. Be sure that you have SWIG 1.3.20 or +.
    4. Download the package numarray.
@@ -44,7 +44,7 @@ To run METRo, you will need the following software packages:
 === Gentoo linux ===
 Become root and
 
-   1. Install gcc with the compiler g77
+   1. Install gcc with the compiler gfortran
 
        USE="fortran" emerge sys-devel/gcc
 
