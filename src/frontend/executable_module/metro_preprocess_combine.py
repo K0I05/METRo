@@ -263,9 +263,13 @@ class Metro_preprocess_combine(Metro_preprocess):
             for i in range(0, nLenWSO-self.NTP):
                 naWS[i-self.NTP2] = naWSO[i+self.NTP-1]
 
-            # Relaxation des observations vers la prevision.
-            # Constante de 4 heures / 4 hour relaxation constant
-            nValueSup = nLenWSO-self.NTP + 4*3600/metro_constant.fTimeStep
+            # Relaxation of observation on the atmospheric forecast
+            # 4 hour relaxation constant
+            nTimeStepsInRelaxation = 4*3600/metro_constant.fTimeStep
+            # Check if there is long enough atmospheric forecast
+            if nLenWS <  nTimeStepsInRelaxation:
+                nTimeStepsInRelaxation = nLenWS
+            nValueSup = nLenWSO-self.NTP + nTimeStepsInRelaxation
             if self.NTP2 < 0:
                 nValueSup = int(round(nValueSup + self.NTP2))
             else: # Cast anyway

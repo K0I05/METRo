@@ -33,16 +33,14 @@
 #
 #
 
-####################################################
-# Name:	       Metro_preprocess_interpol_observation
-# Description: L'interpolation des donnees afin qu'elles
-#               soient au 30 secondes se fait ici.  Le flux solaire
-#               est un cas particulier. 
-# Notes: Fork pour avoir un module pour les forecast et un autre pour les
-#  observations.
-# Auteur: Miguel Tremblay
-# Date: 2 aout 2004
-####################################################
+"""
+Name:	       Metro_preprocess_interpol_observation
+Description: Interplation of data in order to be at every 30 seconds.
+               Solar flux is a particular case.
+
+Author: Miguel Tremblay
+Date: August 2nd 2004
+"""
 
 from metro_preprocess import Metro_preprocess
 
@@ -58,7 +56,7 @@ from toolbox import metro_constant
 _ = metro_util.init_translation('metro_preprocess_interpol_observation')
 
 ##
-# attributs de la classe
+# Class attributes
 ##
 naTimeInterpolated = None # Array representing the time in seconds.
 OneObservationException =  _("Not enough observation to do the interpolation")
@@ -99,31 +97,32 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
 
         pObservation.set_data_collection(observation_data)
 
-####################################################
-# Name: __set_time
-#
-# Parameters: metro_data controlled_data : controlled forecast data
-#
-# Returns: None
-#
-# Functions Called:  numarray.arange, astype
-#                    numarray.zeros
-#                    metro_data.set_matrix
-#                    metro_data.get_matrix_col
-#                    metro_data.append_matrix_col
-#                    observation_data.set_attribute
-#                    metro_config.get_value('FILE_OBSERVATION_FILENAME')
-#
-# Description: Set the time array in the interpolated matrix.
-#
-# Notes:
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      August 5th 2004
-#####################################################
     def __set_time(self, ro_controlled_data, ro_interpolated_data,
                    observation_data):
+        """
+        Name: __set_time
+        
+        Parameters: metro_data controlled_data : controlled forecast data
+        
+        Returns: None
+        
+        Functions Called:  numarray.arange, astype
+                           numarray.zeros
+                           metro_data.set_matrix
+                           metro_data.get_matrix_col
+                           metro_data.append_matrix_col
+                           observation_data.set_attribute
+                           metro_config.get_value('FILE_OBSERVATION_FILENAME')
+
+        Description: Set the time array in the interpolated matrix.
+
+        Notes:
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      August 5th 2004
+        """
+
         # Set the time in the interpolated matrix.
         naTime =  ro_controlled_data.get_matrix_col('Time')
         self.naTimeInterpolated = numarray.arange(naTime[0], \

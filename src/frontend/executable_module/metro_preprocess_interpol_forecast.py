@@ -33,18 +33,15 @@
 #
 #
 
-# # -*- coding:iso-8859-1  -*-
-####################################################
-# Name:	       Metro_preprocess_interpol_forecast
-# Description: L'interpolation des donnees afin qu'elles
-#               soient au 30 secondes se fait ici.  Le flux solaire
-#               est un cas particulier.
-# Notes: Fork pour avoir un module pour les forecast et un autre pour les
-#  observations.
-# TODO MT: Faire les corrections pour que les choses soient 0-based
-# Auteur: Miguel Tremblay
-# Date: 2 aout 2004
-####################################################
+"""
+Name:	       Metro_preprocess_interpol_forecast
+Description: Interpolation of data in order to be at every 30 seconds.
+  Solar flux is a special case.
+
+ TODO MT: Do the update in order that the array are 0-based
+ Auteur: Miguel Tremblay
+ Date: August 2nd 2004
+"""
 
 from metro_preprocess import Metro_preprocess
 
@@ -56,7 +53,7 @@ from toolbox import metro_date
 from toolbox import metro_constant
 
 ##
-# attributs de la classe
+# Class attributes
 ##
 naTime = None # Array representing the time in seconds.
 
@@ -92,29 +89,30 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
 
         pForecast.set_data_collection(forecast_data)
 
-####################################################
-# Name: __set_attribute
-#
-# Parameters: metro_data original_data : original forecast data
-#
-# Returns: None
-#
-# Functions Called: forecast_data.get_matrix_col
-#                   numarray.arange,                  
-#                   metro_date.get_hour
-#                   wf_controlled_data.append_matrix_col
-#
-# Description: Set the naTime array to span all the values
-#               of the input matrix. The input must be at every hour.
-#
-# Notes: The initialization of the processed_data is made here.
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
-    def __set_attribute(self, wf_original_data, wf_controlled_data):
 
+    def __set_attribute(self, wf_original_data, wf_controlled_data):
+        """
+        Name: __set_attribute
+
+        Parameters: metro_data original_data : original forecast data
+
+        Returns: None
+
+        Functions Called: forecast_data.get_matrix_col
+                          numarray.arange,                  
+                          metro_date.get_hour
+                          wf_controlled_data.append_matrix_col
+
+        Description: Set the naTime array to span all the values
+                     of the input matrix. The input must be at every hour.
+
+        Notes: The initialization of the processed_data is made here.
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 12th 2004
+        """
+        
         nbrHours = len(wf_original_data.get_matrix_col('AT'))
 
         self.naTime = numarray.arange(0,nbrHours)*3600        
@@ -122,37 +120,35 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         #  Used in fsint2.
         naTimeStart = \
             wf_original_data.get_matrix_col('FORECAST_TIME')
-#        print naTimeStart
         nHourStart = int(metro_date.get_hour(naTimeStart[0]))
         naTimeAtHours = numarray.arange(0,nbrHours) + nHourStart
 
         wf_controlled_data.append_matrix_col('Hour', naTimeAtHours)
-#        wf_controlled_data.append_matrix_col('Time', self.naTime)
 
 
-####################################################
-# Name: __interpolate_FT
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_processed_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-# Description: Copy self.naTime in wf_processed_data 'FORECAST_TIME'
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 13th 2004
-#####################################################
-
-    # Forecast time
     def __interpolate_FT(self, wf_original_data, wf_controlled_data, \
                          wf_interpolated_data):
+        """
+        Name: __interpolate_FT
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_processed_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                         metro_data.get_matrix_col
+                         metro_data.append_matrix_col
+
+         Description: Interpolate forcast time.
+                      Copy self.naTime in wf_processed_data 'FORECAST_TIME'
+
+         Revision History:
+         Author		Date		Reason
+         Miguel Tremblay      July 13th 2004
+         """
+        
         naFT = wf_original_data.get_matrix_col('FORECAST_TIME')
         naFT = metro_util.interpolate(self.naTime, naFT, \
                                       metro_constant.fTimeStep)
@@ -167,59 +163,59 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         wf_interpolated_data.append_matrix_col('Time', naTime)
 
 
-####################################################
-# Name: __interpolate_AT
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_processed_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-# Description: Does the interpolation of the air temperature
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
-
     # Air temperature
     def __interpolate_AT(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_AT
+        
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_processed_data : container of the interpolated
+                    data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+
+        Description: Does the interpolation of the air temperature
+
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 12th 2004
+        """
+        
         naAT = wf_original_data.get_matrix_col('AT')
         naAT = metro_util.interpolate(self.naTime, naAT, \
                                       metro_constant.fTimeStep)
         wf_interpolated_data.append_matrix_col('AT', naAT)
 
         
-####################################################
-# Name: __interpolate_QP
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_interpolated_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate, shift_right
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-#
-# Description: Add the rain (in mm.) and the snow (in cm.) and store it
-#               in RA. Since 1 cm. is, roughly, 1 mm. of water, the sum
-#               is considerated in mm.
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
     def __interpolate_QP(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_QP
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_interpolated_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate, shift_right
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+
+
+        Description: Add the rain (in mm.) and the snow (in cm.) and store it
+                      in RA. Since 1 cm. is, roughly, 1 mm. of water, the sum
+                      is considerated in mm.
+
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 12th 2004
+        """
         naRA = wf_original_data.get_matrix_col('RA')
         naSN = wf_original_data.get_matrix_col('SN')
         naQP = naSN/10*metro_constant.nSnowWaterRatio \
@@ -248,92 +244,89 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         wf_interpolated_data.append_matrix_col('SN', naSN)
         wf_interpolated_data.append_matrix_col('RA', naRA)
         
-####################################################
-# Name: __interpolate_WS
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_interpolated_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-#
-# Description: Interpolate wind speed.  Wind is in km/h and is converted in
-#               m/s by the product with 0.2777777
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
 
     # Wind velocity
     def __interpolate_WS(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_WS
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_interpolated_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+
+
+        Description: Interpolate wind speed.  Wind is in km/h and is converted in
+                     m/s by the product with 0.2777777
+
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 12th 2004
+        """
         naWS = wf_original_data.get_matrix_col('WS')*0.2777777
         naWS = metro_util.interpolate(self.naTime, naWS, \
                                       metro_constant.fTimeStep)
         wf_interpolated_data.append_matrix_col('WS', naWS)
         
-####################################################
-# Name: __interpolate_TD
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_interpolated_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-#
-# Description: Interpolate the dew point.
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
 
     # Dew point
     def __interpolate_TD(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_TD
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_interpolated_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+
+
+        Description: Interpolate the dew point.
+
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 12th 2004
+        """
         naTD = wf_original_data.get_matrix_col('TD')
-#        print "original TD", naTD
         naTD = metro_util.interpolate(self.naTime, naTD, \
                                       metro_constant.fTimeStep)
-#        print "interpolate TD", naTD
         wf_interpolated_data.append_matrix_col('TD', naTD)
 
         
-####################################################
-# Name: __interpolate_AP
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_interpolated_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#
-#
-# Description: Interpolate the surface pressure. Pressure in in hectopascal.
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 12th 2004
-#####################################################
-
     # Pressure
     def __interpolate_AP(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_AP
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_interpolated_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+
+
+         Description: Interpolate the surface pressure. Pressure in in hectopascal.
+
+
+         Revision History:
+         Author		Date		Reason
+         Miguel Tremblay      July 12th 2004
+         """
         naAP = wf_original_data.get_matrix_col('AP')
         
         # Replace invalid date by the normal pressure (1013.25 mb)
@@ -349,30 +342,30 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         wf_interpolated_data.append_matrix_col('AP', naAP)
 
 
-####################################################
-# Name: __interpolate_PI
-#
-# Parameters:[I] metro_data wf_original_data : original data.  Read-only
-#            [I] metro_data wf_interpolated_data : container of the interpolated
-#                 data.
-#
-# Returns: None
-#
-# Functions Called: metro_util.interpolate,
-#                   metro_data.get_matrix_col
-#                   metro_data.append_matrix_col
-#                   numarray.where, around
-#
-# Description: Interpolate the type of precipitation.  The nearest neighbor is
-#               is used.
-#
-#
-# Revision History:
-#  Author		Date		Reason
-# Miguel Tremblay      July 15th 2004
-#####################################################
     # Type of precipitation
     def __interpolate_PI(self, wf_original_data, wf_interpolated_data):
+        """
+        Name: __interpolate_PI
+
+        Parameters:[I] metro_data wf_original_data : original data.  Read-only
+                   [I] metro_data wf_interpolated_data : container of the interpolated
+                   data.
+
+        Returns: None
+
+        Functions Called: metro_util.interpolate,
+                          metro_data.get_matrix_col
+                          metro_data.append_matrix_col
+                          numarray.where, around
+
+        Description: Interpolate the type of precipitation.  The nearest neighbor is
+                      is used.
+
+
+        Revision History:
+        Author		Date		Reason
+        Miguel Tremblay      July 15th 2004
+        """
         naRA = wf_original_data.get_matrix_col('RA')
         naSN = wf_original_data.get_matrix_col('SN')
         naAT = wf_original_data.get_matrix_col('AT')

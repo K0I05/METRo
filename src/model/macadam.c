@@ -346,7 +346,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones, long nNb
   /************ roadcast **************************************************/
   f77name(balanc)(dpFS, dpFI, dpPS, dpTA, dpAH, dpFF, dpTYP, dpFT, dpQP, &nIRef,\
 		  &nIR40, &nNtp2, &nNbrTimeSteps, dpCnt, dpItp, &bFlat, &dFCorr,\
-		  dpWw,&dWa, &dAlr, &dAlr, &dFp, &dFsCorr, &dFiCorr, &dEr1,\
+		  dpWw,&dWa, &dAln, &dAlr, &dFp, &dFsCorr, &dFiCorr, &dEr1,\
 		  &dEr2, &dEpsilon, &dZ0, &dZ0t, &dZu, &dZt, stEc.plArray,\
 		  stRT.pdArray, stRA.pdArray ,stSN.pdArray, stRC.plArray,\
 		  stIR.pdArray, stSF.pdArray, stFV.pdArray, stFC.pdArray,\

@@ -32,7 +32,14 @@
 #
 #
 
-#
+"""
+Name:          metro_validate.py
+Description:   Module that is used to validate the well-formatedness of the XML files.
+
+Author:        Francois Fortin
+Date:          2004
+"""
+
 
 from metro_module import Metro_module
 

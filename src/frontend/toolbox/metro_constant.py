@@ -33,11 +33,11 @@
 #
 #
 
-####################################################
-# Name:	       metro_constant
-# Description: The constant needed in different modules of METRo
-# Notes:   
-####################################################
+"""
+Name:	       metro_constant
+Description: The constant needed in different modules of METRo
+Notes:   
+"""
 
 # platform dependent?
 Infinity = 1e1000

@@ -2,7 +2,7 @@
 <roadcast>
   <header>
     <version>1.5</version>
-    <production-date>2007-03-01T21:53:05Z</production-date>
+    <production-date>2007-04-17T15:25:14Z</production-date>
     <road-station>rsy</road-station>
     <latitude>46.2</latitude>
     <longitude>-60.28</longitude>
@@ -2804,16 +2804,16 @@
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>44.17</sf>
+      <sf>43.5</sf>
       <ir>194.04</ir>
-      <fv>32.6</fv>
-      <fc>61.55</fc>
+      <fv>32.63</fv>
+      <fc>61.6</fc>
       <fa>10.0</fa>
-      <fg>78.32</fg>
-      <bb>-264.04</bb>
+      <fg>77.76</fg>
+      <bb>-264.01</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>-6.38</st>
+      <st>-6.39</st>
       <sst>-1.0</sst>
     </prediction>
     <prediction>
@@ -2827,16 +2827,16 @@
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>89.48</sf>
+      <sf>87.81</sf>
       <ir>194.04</ir>
-      <fv>26.49</fv>
-      <fc>51.43</fc>
+      <fv>26.63</fv>
+      <fc>51.65</fc>
       <fa>10.0</fa>
-      <fg>102.02</fg>
-      <bb>-269.41</bb>
+      <fg>100.84</fg>
+      <bb>-269.3</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>-5.04</st>
+      <st>-5.06</st>
       <sst>-1.0</sst>
     </prediction>
     <prediction>
@@ -2850,16 +2850,16 @@
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>134.78</sf>
+      <sf>132.2</sf>
       <ir>194.04</ir>
-      <fv>17.83</fv>
-      <fc>40.24</fc>
+      <fv>18.26</fv>
+      <fc>40.83</fc>
       <fa>10.0</fa>
-      <fg>121.47</fg>
-      <bb>-275.41</bb>
+      <fg>120.11</fg>
+      <bb>-275.22</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>-3.55</st>
+      <st>-3.6</st>
       <sst>-1.0</sst>
     </prediction>
     <prediction>
@@ -2873,16 +2873,16 @@
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>183.32</sf>
+      <sf>180.34</sf>
       <ir>194.04</ir>
-      <fv>2.75</fv>
-      <fc>20.83</fc>
+      <fv>3.5</fv>
+      <fc>21.76</fc>
       <fa>10.0</fa>
-      <fg>129.85</fg>
-      <bb>-281.09</bb>
+      <fg>128.78</fg>
+      <bb>-280.85</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>-2.18</st>
+      <st>-2.24</st>
       <sst>-1.0</sst>
     </prediction>
     <prediction>
@@ -2891,21 +2891,21 @@
       <at>-1.0</at>
       <td>-2.0</td>
       <ws>24.0</ws>
-      <sn>1.1</sn>
+      <sn>1.11</sn>
       <ra>0.0</ra>
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>231.94</sf>
+      <sf>229.66</sf>
       <ir>194.04</ir>
-      <fv>-15.38</fv>
-      <fc>-0.73</fc>
+      <fv>-14.51</fv>
+      <fc>0.25</fc>
       <fa>10.0</fa>
-      <fg>133.56</fg>
-      <bb>-286.31</bb>
+      <fg>133.36</fg>
+      <bb>-286.09</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>-0.93</st>
+      <st>-0.98</st>
       <sst>-1.0</sst>
     </prediction>
     <prediction>
@@ -2914,21 +2914,21 @@
       <at>-1.0</at>
       <td>-2.0</td>
       <ws>24.0</ws>
-      <sn>0.99</sn>
+      <sn>1.0</sn>
       <ra>0.0</ra>
       <qp-sn>0.0</qp-sn>
       <qp-ra>0.0</qp-ra>
       <cc>0</cc>
-      <sf>280.57</sf>
+      <sf>280.56</sf>
       <ir>194.04</ir>
-      <fv>-28.54</fv>
-      <fc>-19.61</fc>
+      <fv>-28.48</fv>
+      <fc>-19.54</fc>
       <fa>10.0</fa>
-      <fg>146.04</fg>
-      <bb>-290.41</bb>
+      <fg>146.19</fg>
+      <bb>-290.4</bb>
       <fp>0.0</fp>
       <rc>3</rc>
-      <st>0.01</st>
+      <st>0.0</st>
       <sst>-1.0</sst>
     </prediction>
   </prediction-list>

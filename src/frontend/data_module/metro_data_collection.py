@@ -57,7 +57,8 @@ _ = metro_util.init_translation('metro_data_collection')
 ERROR_ATTRIBUTE = "Attribute_error"
 
 class Metro_data_collection:
-    """Basic class for data collection
+    """
+    Basic class for data collection
     Provide the method to manipulate attributes. Attributes are stored into a
     list.
     """

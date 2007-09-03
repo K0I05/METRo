@@ -83,13 +83,15 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
         Author: Miguel Tremblay
         Date: March 5th 2007
         """
+        # Check if the value is given as an argument
         if metro_config.get_value('INIT_ROADCAST_START_DATE') != "":
              # Set the xml header value
              controlled_roadcast = roadcast_data.get_subsampled_data()
              controlled_roadcast.set_header_value('FIRST_ROADCAST',\
                                                   metro_config.get_value('INIT_ROADCAST_START_DATE'))
              return 0
-        else :
+        else : # if value of INIT_ROADCAST_START_DATE is not given, fetch the first
+            # round 20 minutes.
             naOT = observation_data.get_matrix_col('OBSERVATION_TIME')
             fLast_observation_date = naOT[len(naOT)-1]
             sLast_observation_date = metro_date.seconds2iso8601(fLast_observation_date)
@@ -120,10 +122,12 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
                     return i
 
 
-                #  Something bad hapened.
-                sMessage = _("Unable to determine the first time of roadcast!")
-                metro_logger.print_message(metro_logger.LOGGER_MSG_STOP,\
-                                           sMessage)
+
+            #  Something bad hapened.
+            sMessage = _("Unable to determine the first time of roadcast!")
+            metro_logger.print_message(metro_logger.LOGGER_MSG_STOP,\
+                                       sMessage)
+
 
     def __subsample_roadcast(self, roadcast, nFirstRoundTimestep):
 

@@ -1,11 +1,11 @@
-# translation of metro_preprocess_validate_input.po to 
 # Copyright (C) 2007 Environment Canada, 2007.
+# , 2007.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: metro_preprocess_validate_input\n"
-"POT-Creation-Date: 2007-03-05 18:17+UTC\n"
-"PO-Revision-Date: 2007-03-05 18:32+0000\n"
+"POT-Creation-Date: 2007-04-11 14:02+UTC\n"
+"PO-Revision-Date: 2007-04-11 14:17+0000\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -14,20 +14,40 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 "X-Generator: KBabel 1.9.1\n"
 
-#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:93
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:106
+msgid "METRo needs more than one forecast date! Exiting"
+msgstr "METRo needs more than one forecast date! Exiting"
+
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:156
+msgid "Too many observation. Removing the %s seconds "
+msgstr "Too many observation. Removing the %s seconds "
+
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:158
+msgid "i.e. %s hour(s)\n"
+msgstr "i.e. %s hour(s)\n"
+
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:159
+msgid "Old start time is %s\n"
+msgstr "Old start time is %s\n"
+
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:160
+msgid "New start time is %s"
+msgstr "New start time is %s"
+
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:190
 #, fuzzy
 msgid "Last observation date is: '%s'"
 msgstr "Last observation date is: '%s'"
 
-#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:114
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:211
 msgid "Forecast and observation don't overlap. The date\n"
 msgstr "Forecast and observation don't overlap. The date\n"
 
-#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:115
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:212
 msgid "of the first forecast must be before the last date of "
 msgstr "of the first forecast must be before the last date of "
 
-#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:116
+#: ../src/frontend/executable_module/metro_preprocess_validate_input.py:213
 msgid ""
 "observation.\n"
 "First Forecast='%s'\n"
