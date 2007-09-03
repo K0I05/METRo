@@ -1,7 +1,7 @@
                       METRo README file
 
 
-You are currently reading the README file of the release 3.1.0 (April 2007)
+You are currently reading the README file of the release 3.1.0 (September 2007)
 
 
 == What is METRo ? ==
@@ -37,7 +37,7 @@ http://documentation.wikia.com/wiki/METRo
 See man page in metro/usr/share/man/man1/ directory.
 METRo uses needs the following software:
 * python 2.3 or +
-* g77
+* gfortran
 * SWIG
 * python numarray
 * libxml2 & libxslt
