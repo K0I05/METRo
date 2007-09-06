@@ -57,7 +57,7 @@ lCloudsNight2 = [214.7, 226.2, 234.8, 243.4, 250.7, 259.2, 270.9, 280.9, 298.4]
 # QA & QC for observation
 nRoadTemperatureMin = -40
 nRoadTemperatureHigh = 80
-nSubSurRoadTmpHigh = 40
+nSubSurRoadTmpHigh = 80
 nSubSurRoadTmpMin = -40
 nAirTempHigh = 50
 nAirTempMin = -60
