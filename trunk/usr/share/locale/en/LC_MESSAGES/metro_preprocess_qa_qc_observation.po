@@ -1,0 +1,108 @@
+# translation of metro_preprocess_qa_qc_observation.po to 
+# translation of metro_preprocess_qa_qc_observation.po to
+# Copyright (C) 2007 Environment Canada.
+# Miguel Tremblay <miguel.tremblay@ec.gc.ca>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: metro_preprocess_qa_qc_observation\n"
+"POT-Creation-Date: 2007-03-05 18:17+UTC\n"
+"PO-Revision-Date: 2004-11-18 12:33-0500\n"
+"Last-Translator: Miguel Tremblay <miguel.tremblay@ec.gc.ca>\n"
+"Language-Team:  <C@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:100
+#, fuzzy
+msgid "No valid observations. Halting METRo"
+msgstr "No valid observation"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:134
+msgid "No valid observation"
+msgstr "No valid observation"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:178
+msgid "Invalid road temperature"
+msgstr "Invalid road temperature"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:183
+msgid "%d th  temperature is %f"
+msgstr "%d th  temperature is %f"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:229
+msgid "More than %d minutes between 2 measures"
+msgstr "More than %d minutes between 2 measures"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:236
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:285
+msgid "Indice: %d"
+msgstr "Indice: %d"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:239
+msgid "Cutoff time: day:%d hour:%d minute:%d"
+msgstr "Cutoff time: day:%d hour:%d minute:%d"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:255
+msgid "Time of observation are not in order. "
+msgstr "Time of observation are not in order. "
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:256
+msgid "Check the %d th value"
+msgstr "Check the %d th value"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:278
+msgid "Observation is more than %d hours"
+msgstr "Observation is more than %d hours"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:280
+msgid "before the first roadcast"
+msgstr "before the first roadcast"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:306
+msgid "Observation after the first roadcast time of METRo"
+msgstr "Observation after the first roadcast time of METRo"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:310
+msgid "Threshold: %d"
+msgstr "Threshold: %d"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:317
+msgid "Time difference: %f"
+msgstr "Time difference: %f"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:363
+msgid "No valid sub-surface temperature (element <sst>) in observation file %s"
+msgstr ""
+"No valid sub-surface temperature (element <sst>) in observation file %s"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:511
+msgid "First atmospheric forecast: %s"
+msgstr "First atmospheric forecast time:%s"
+
+#: ../src/frontend/executable_module/metro_preprocess_qa_qc_observation.py:516
+msgid "First valid observation   : %s"
+msgstr "First valid observation   : %s"
+
+#, fuzzy
+#~ msgid "More than 8 hours between the valid observations"
+#~ msgstr "More than 8 hours between the valid observations"
+
+#~ msgid " and the beginning of the roadcast"
+#~ msgstr " and the beginning of the roadcast"
+
+#~ msgid ""
+#~ "Roadcast start date set to the date of\n"
+#~ "the last "
+#~ msgstr ""
+#~ "Roadcast start date set to the date of\n"
+#~ "the last "
+
+#~ msgid "observation: '%s'"
+#~ msgstr "observation: '%s'"
+
+#~ msgid "day %d hour %d minute %d"
+#~ msgstr "day %d hour %d minute %d"

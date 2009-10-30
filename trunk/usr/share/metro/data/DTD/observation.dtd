@@ -1,0 +1,16 @@
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT road-station (#PCDATA)>
+<!ELEMENT header (version, road-station)>
+
+<!ELEMENT observation-time (#PCDATA)>
+<!ELEMENT at (#PCDATA)>
+<!ELEMENT td (#PCDATA)>
+<!ELEMENT pi (#PCDATA)>
+<!ELEMENT ws (#PCDATA)>
+<!ELEMENT sc (#PCDATA)>
+<!ELEMENT st (#PCDATA)>
+<!ELEMENT sst (#PCDATA)>
+<!ELEMENT measure ( observation-time, at, td, pi, ws, sc, st, sst )>
+<!ELEMENT measure-list ( measure* )>
+
+<!ELEMENT observation ( header, measure-list )>

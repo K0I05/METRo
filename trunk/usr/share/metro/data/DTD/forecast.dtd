@@ -1,0 +1,19 @@
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT station_id (#PCDATA)>
+<!ELEMENT production-date (#PCDATA)>
+<!ELEMENT header (version, station-id, production-date)>
+
+<!ELEMENT forecast-time (#PCDATA)>
+<!ELEMENT ws (#PCDATA)>
+<!ELEMENT pi (#PCDATA)>
+<!ELEMENT at (#PCDATA)>
+<!ELEMENT td (#PCDATA)>
+<!ELEMENT cc (#PCDATA)>
+<!ELEMENT sn (#PCDATA)>
+<!ELEMENT ra (#PCDATA)>
+<!ELEMENT ap (#PCDATA)>
+<!ELEMENT prediction ( forecast-time, ws, pi, at, td, cc, sn, ra, ap )>
+
+<!ELEMENT prediction-list ( prediction* )>
+
+<!ELEMENT forecast ( header, prediction-list )>

@@ -1,0 +1,20 @@
+<!ELEMENT latitude (#PCDATA)>
+<!ELEMENT longitude (#PCDATA)>
+
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT road-station (#PCDATA)>
+<!ELEMENT scribe-point (#PCDATA)>
+<!ELEMENT time-zone (#PCDATA)>
+<!ELEMENT production-date (#PCDATA)>
+<!ELEMENT coordinate (latitude, longitude)>
+<!ELEMENT station-type (#PCDATA)>
+<!ELEMENT header (version, road-station, scribe-point, time-zone, production-date, coordinate, station-type)>
+
+<!ELEMENT position (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT thickness (#PCDATA)>
+<!ELEMENT roadlayer ( position, type, thickness )>
+
+<!ELEMENT roadlayer-list ( roadlayer* )>
+
+<!ELEMENT station ( header, roadlayer-list )>
