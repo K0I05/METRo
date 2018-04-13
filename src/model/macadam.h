@@ -25,7 +25,7 @@
 
 /* Pas de temps du modèle de bilan énergétique */
 /* Model time step in second for the energy balance */
-#define dDT 30.0
+#define dMODELTIMESTEP 30.0
 
 /* Nombre maximal de niveaux des grilles dans le sol */
 /* Maximal number of grid level in the ground*/

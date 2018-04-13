@@ -246,10 +246,11 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
   }
 
   /* Extraction of observations */
-  /*  Those -1 is because it is use in fortran */
+  /*  Those -1 is because it is used in fortran */
   nDeltaTIndice = (dDeltaT)*3600/30.-1;
   nLenObservation = nLenObservation -1;
-
+  printf("nLenObservation: %ld\t%f\t%ld\n", nDeltaTIndice, dDeltaT, nLenObservation);
+  
    
   /***********************************************************************/
   /*   Coupling is different if there is more or less than 3 hours.     */
@@ -273,8 +274,8 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
   else if(bpNoObs[0]){
     if(!bSilent)
       printf(" Not enough data for initialization.\n");
-    nNtdcl  = nLenObservation - ((nLenObservation < 28800.0/dDT)\
-				 ? nLenObservation : 28800.0/dDT);
+    nNtdcl  = nLenObservation - ((nLenObservation < 28800.0/dMODELTIMESTEP)\
+				 ? nLenObservation : 28800.0/dMODELTIMESTEP);
     /* Patch because nNtdcl does not take the value 0 in fortran!*/
     if(nNtdcl == 0) 
       nNtdcl =1;
@@ -316,13 +317,15 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
 		    &(dpTAO[nDeltaTIndice]), &dDiff, &dMLon, npSwo, \
 		    stTemperatureDepth.pdArray, &bDeepTemp, &dDeepTemp);
     nNtdcl  = nLenObservation - nDeltaTIndice -\
-      ((nLenObservation-nDeltaTIndice < 28800.0/dDT)	\
-       ? nLenObservation-nDeltaTIndice : 28800.0/dDT);
+      ((nLenObservation-nDeltaTIndice < 28800.0/dMODELTIMESTEP)	\
+       ? nLenObservation-nDeltaTIndice : 28800.0/dMODELTIMESTEP);
+       printf ("DT:%f\t%ld\n", dMODELTIMESTEP, nNtdcl);
     f77name(initial)(dpItp , (dpRTO+1), (dpDTO+1), (dpTAO+1), &nOne,	\
 		     &nLenObservation, &stTemperatureDepth.nSize,\
 		     &nIR40, &bFlat, npSwo, dpCapacity, dpConductivity); 
     nNtp = 0 + nNtdcl;
     nNtp2 = nLenObservation - nDeltaTIndice;
+    printf("NTP:%ld\t%ld\n", nNtp, nNtp2);
     f77name(coupla)(dpFS, dpFI, dpPS, dpTA, dpAH, dpFF, npTYP, dpQP, \
 		    npRC, &stTemperatureDepth.nSize, &nNtp, &nNtp2, dpItp,\
 		    &(dpRTO[nLenObservation]), &bFlat, &dFCorr, \
