@@ -350,7 +350,8 @@ def create_node_tree_from_matrix( domDoc, nodeParent, sPrediction_xpath,
             if dData_type[sData_type_name].has_key('CHILD'):
                 #  create the node containing a list of "sub-node"
                 lChildList = dData_type[sData_type_name]['CHILD']
-                nodeData = dWriteHandlers[sData_type_name](sXml_tag,lChildList,val,dWriteHandlers)
+                nodeData = dWriteHandlers[sData_type_name] \
+                           (sXml_tag,lChildList,val,dWriteHandlers)
             else:
                 #  create the node 
                 nodeData = dWriteHandlers[sData_type_name](sXml_tag,val)
