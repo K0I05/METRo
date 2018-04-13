@@ -1,4 +1,3 @@
-# -*- coding: UTF8 -*-
 #
 # METRo : Model of the Environment and Temperature of Roads
 # METRo is Free and is proudly provided by the Government of Canada
@@ -184,7 +183,7 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         Parameters:
         wf_controlled_data (metro_data) : controlled data. Read-only
         """
-        npTime = wf_controlled_data.get_matrix_col('Time') 
+        npTime = wf_controlled_data.get_matrix_col('TimeSecond') 
 
         # Only interpolate if IR is given
         if  metro_config.get_value('IR'):
@@ -208,7 +207,7 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         Parameters:
         wf_controlled_data (metro_data) : controlled data. Read-only
         """
-        npTime = wf_controlled_data.get_matrix_col('Time') 
+        npTime = wf_controlled_data.get_matrix_col('TimeSecond') 
 
         # Only interpolate if SF is given
         if  metro_config.get_value('SF'):

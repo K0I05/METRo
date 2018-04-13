@@ -103,14 +103,14 @@ class Metro_model(Metro_module):
 
     def __get_nb_timesteps( self, forecast ):
         wf_data = forecast.get_interpolated_data()
-        npFT = wf_data.get_matrix_col('Time')
+        npFT = wf_data.get_matrix_col('TimeHour')
 
         return len(npFT)
 
 
     def __get_observation_lenght( self, observation ):
         obs_data = observation.get_interpolated_data()
-        lTime_obs = obs_data.get_matrix_col('Time').tolist()
+        lTime_obs = obs_data.get_matrix_col('TimeHour').tolist()
         return len(lTime_obs)        
 
     def __get_observation_delta_t( self, observation ):
@@ -144,6 +144,11 @@ class Metro_model(Metro_module):
 
         iModel_start_h = metro_date.get_hour(fStart_time)
         sMessage = _("hour: [%s]") % (iModel_start_h)
+        metro_logger.print_message(metro_logger.LOGGER_MSG_DEBUG,
+                                   sMessage)
+
+        iModel_start_M = metro_date.get_minute(fStart_time)
+        sMessage = _("minute: [%s]") % (iModel_start_M)
         metro_logger.print_message(metro_logger.LOGGER_MSG_DEBUG,
                                    sMessage)
 
@@ -233,7 +238,7 @@ class Metro_model(Metro_module):
         
 
         # Number of 30 seconds step.
-        npFT = wf_interpolated_data.get_matrix_col('Time')
+        npFT = wf_interpolated_data.get_matrix_col('TimeHour')
         nNbrTimeSteps = self.__get_nb_timesteps(forecast)
         lAH = wf_interpolated_data.get_matrix_col('AH').tolist()
 
@@ -241,8 +246,14 @@ class Metro_model(Metro_module):
         ro_interpolated_data = observation.get_interpolated_data()
         lAT_obs = ro_interpolated_data.get_matrix_col('AT').tolist()
         lST_obs =  ro_interpolated_data.get_matrix_col('ST').tolist()
+
+        # DEBUG
+#        for i in range(len(lST_obs)):
+ #           print "npFT", i, npFT[i]
+  #          print  "ST obs", lST_obs[i]
+            
         lSST_obs =  ro_interpolated_data.get_matrix_col('SST').tolist()
-        lTime_obs = ro_interpolated_data.get_matrix_col('Time').tolist()
+        lTime_obs = ro_interpolated_data.get_matrix_col('TimeHour').tolist()
         # Deep soil value given in command line
         bDeepTemp = metro_config.get_value('DEEP_SOIL_TEMP')
         dDeepTemp =  float(metro_config.get_value('DEEP_SOIL_TEMP_VALUE'))
@@ -376,6 +387,11 @@ class Metro_model(Metro_module):
         lFP = (macadam.get_fp())[:iNb_timesteps]
         lSST =  (macadam.get_sst())[:iNb_timesteps]
 
+        # DEBUG
+#        for i in range(len(lST)):
+#            lST[i] = 
+ #           print "ST", i, lST[i]
+
         if metro_config.get_value('TL') == True:
             # Temperature of levels under the ground.
             nNbrVerticalLevel = macadam.get_nbr_levels()
@@ -407,7 +423,8 @@ class Metro_model(Metro_module):
         #  ce soit corrige.
         npRT = wf_data.get_matrix_col('FORECAST_TIME')[:iNb_timesteps]
         npRT = npRT + 30
-        npHH = wf_data.get_matrix_col('Time')[:iNb_timesteps]
+        npHH = wf_data.get_matrix_col('TimeHour')[:iNb_timesteps]
+        print "npHH", npHH
         npAT = wf_data.get_matrix_col('AT')[:iNb_timesteps]
         npFA = wf_data.get_matrix_col('FA')[:iNb_timesteps]
         # 3.6 is to convert from m/s to km/h

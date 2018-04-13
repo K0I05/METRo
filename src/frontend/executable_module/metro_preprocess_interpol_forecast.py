@@ -164,10 +164,12 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         #  must be done (if I remember well), because otherwhise the array are not included
         #  in the matrix. It might be because NumPy made use of pointers.
         npTime = self.npTime
-        wf_controlled_data.append_matrix_col('Time', npTime)
+        print "npTime", npTime
+        wf_controlled_data.append_matrix_col('TimeSecond', npTime)
         npTime = metro_util.interpolate(self.npTime, npTime)
         npTime = (npTime+30)/3600+nHourStart
-        wf_interpolated_data.append_matrix_col('Time', npTime)
+        print "npTime", npTime
+        wf_interpolated_data.append_matrix_col('TimeHour', npTime)
 
 
 

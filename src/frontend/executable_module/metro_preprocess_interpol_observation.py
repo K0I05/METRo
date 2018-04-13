@@ -140,7 +140,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
 
         # Save the time array
         if len(self.npTimeInterpolated) > 1:
-            ro_interpolated_data.append_matrix_col('Time', \
+            ro_interpolated_data.append_matrix_col('TimeHour', \
                                                 self.npTimeInterpolated)
         # Only one observation, abort interpolation
         elif len(self.npTimeInterpolated) == 1:
