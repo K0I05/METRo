@@ -124,8 +124,8 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
         """
         
         npOT = ro_controlled_data.get_matrix_col('OBSERVATION_TIME')
-        npTime = numpy.zeros(len(npOT))
-        npTime[0] = metro_date.get_hour(npOT[0])*3600 + \
+        npTimeSecond = numpy.zeros(len(npOT))
+        npTimeSecond[0] = metro_date.get_hour(npOT[0])*3600 + \
                     metro_date.get_minute(npOT[0])*60
         if len(npOT) == 0:
             sMessage = _("No valid observation")
@@ -136,10 +136,11 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
             fTimeElapsed =  metro_date.get_elapsed_time(npOT[i], \
                                                         npOT[i-1],\
                                                         "UTC", "seconds")
-            npTime[i] = npTime[i-1]+fTimeElapsed
+            npTimeSecond[i] = npTimeSecond[i-1]+fTimeElapsed
 
         # Registered.
-        ro_controlled_data.append_matrix_col('Time', npTime)
+        print "npTime2", npTimeSecond
+        ro_controlled_data.append_matrix_col('TimeSecond', npTimeSecond)
     
     
 
@@ -257,11 +258,11 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
         Miguel Tremblay      August 4th 2004
         """
         
-        npTime = ro_controlled_data.get_matrix_col('Time')
-        npCheck = metro_util.get_difference_array(npTime)
+        npTimeSecond = ro_controlled_data.get_matrix_col('TimeSecond')
+        npCheck = metro_util.get_difference_array(npTimeSecond)
         # If a gap of more than nGapMinuteObservation
         #  minutes is identify, cut the value before.
-        npCheck = metro_util.get_difference_array(npTime)        
+        npCheck = metro_util.get_difference_array(npTimeSecond)        
         npBad = numpy.where( npCheck > metro_constant.\
                                 nGapMinuteObservation*60, 1, 0)
         npBadIndice =  (numpy.nonzero(npBad))[0]
@@ -286,7 +287,6 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
             
             toto = numpy.arange(0,npBadIndice[len(npBadIndice)-1]+1) 
             ro_controlled_data.del_matrix_row(toto)
-        npTime = ro_controlled_data.get_matrix_col('Time')
         npBad = numpy.where( npCheck < 0, 1, 0)
         npBadIndice = (numpy.nonzero(npBad))[0]
         # Accept 1 value under zero because the last value of
@@ -306,7 +306,7 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
 
         npFT = wf_controlled_data.get_matrix_col('FORECAST_TIME')
         
-        npOT = ro_controlled_data.get_matrix_col('Time')
+        npOT = ro_controlled_data.get_matrix_col('TimeSecond')
         nHourStart = metro_date.get_hour(npFT[0])
         npDiff = - npOT + nHourStart*3600
         npBad = numpy.where(npDiff > metro_constant.\
@@ -336,7 +336,7 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
         # Check if the observation are not before the start of the roadcast
         #  if specified.
         fStart_time = metro_date.parse_date_string(sStart_time)
-        npOT = ro_controlled_data.get_matrix_col('Time')\
+        npOT = ro_controlled_data.get_matrix_col('TimeSecond')\
                +nHourStart*3600
         npDiff = - npOT + int(metro_date.get_hour(fStart_time))*3600
         npBad = numpy.where(npDiff > metro_constant\
@@ -456,8 +456,8 @@ class Metro_preprocess_qa_qc_observation(Metro_preprocess):
         
         # Take any of the column of the observation to check the dimensions.
         npAT = ro_controlled_data.get_matrix_col('AT') 
-        npTime = ro_controlled_data.get_matrix_col('Time')
-        nNbr30Seconds = (npTime[len(npTime)-1]-npTime[0]) \
+        npTimeSecond = ro_controlled_data.get_matrix_col('TimeSecond')
+        nNbr30Seconds = (npTimeSecond[len(npTimeSecond)-1]-npTimeSecond[0]) \
                         /metro_constant.fTimeStep
 
         # Initialize the boolean field

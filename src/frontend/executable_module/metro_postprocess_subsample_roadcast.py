@@ -95,13 +95,23 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
             naOT = observation_data.get_matrix_col('OBSERVATION_TIME')
             fLast_observation_date = naOT[len(naOT)-1]
             sLast_observation_date = metro_date.seconds2iso8601(fLast_observation_date)
-
+            
             # Fetch the first 20 minutes value.
             iNb_timesteps = roadcast_data.get_attribute('FORECAST_NB_TIMESTEPS')
             nSecondsForOutput = metro_constant.nMinutesForOutput*60
             lTimeStep = roadcast_data.get_controlled_data().get_matrix_col('HH')
+
+            print "Minutes", metro_constant.nMinutesForOutput
+            print "Secondes", nSecondsForOutput
+            print "INIT", lTimeStep[0]
             for i in range(0, iNb_timesteps):
                 fCurrentTime = lTimeStep[i]*3600
+
+                # DEBUG
+                sCurrentTime = metro_date.seconds2iso8601(fCurrentTime)
+                print "Current Time", fCurrentTime, sCurrentTime,\
+                    round(fCurrentTime)%nSecondsForOutput
+                
                 # Forecast at every 20 minutes, i.e. 1200 seconds  
                 # if current time is a 20 minute interval
                 # and roadcast time is >= roadcast start date
@@ -109,6 +119,7 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
                     sLast_observation =  metro_config.\
                                         get_value('DATA_ATTRIBUTE_LAST_OBSERVATION')
                     fLast_observation = metro_date.parse_date_string(sLast_observation)
+                    print "Temps final",  i,lTimeStep[i], fCurrentTime, fLast_observation
                     sStart_date = metro_date.seconds2iso8601(fLast_observation + \
                                                              (i+1)*\
                                                              metro_constant.fTimeStep)
@@ -148,6 +159,15 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
             sElement = dRoadcast_item['NAME']
             dElement_Array[sElement] = rc_controlled.get_matrix_col(sElement)
 
+            # DEBUG
+#            print sElement
+#            if str(sElement) == "HH":
+#                for i in range(dElement_Array[sElement].size):
+#                   dItem = dElement_Array[sElement][i]
+#                   print "toto", i, dItem
+                        
+
+            
         # Get some values necessary for the creation of a complete roadcast
         iObservation_len = roadcast.get_attribute('OBSERVATION_LENGTH')
         fObservation_delta_t = roadcast.get_attribute('OBSERVATION_DELTAT_T')
@@ -169,7 +189,6 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
         nSecondsForOutput = metro_constant.nMinutesForOutput*60
         for i in range(nFirstRoundTimestep, iNb_timesteps):
             fCurrentTime = dElement_Array['HH'][i]*3600
-
             # Forecast at every 20 minutes, i.e. 1200 seconds  
             lRCvect = [0]*rc_subsampled.get_real_nb_matrix_col()
             lMatrix_line = [None]*rc_subsampled.get_real_nb_matrix_col()
@@ -180,12 +199,15 @@ class Metro_postprocess_subsample_roadcast(Metro_postprocess):
                    dElement_Array['ROADCAST_TIME'][i] >= fStartDate :
 
                 for sElement in dElement_Array.keys():
-
+                        
                     lIndexList = rc_subsampled.index_of_matrix_col(sElement)
                     if not rc_subsampled.is_multi_col(sElement) :
                         # single col
                         lMatrix_line[rc_subsampled.index_of_matrix_col(sElement)[0]] = \
-                            dElement_Array[sElement][i]                        
+                            dElement_Array[sElement][i]
+#                        if str(sElement) == "ST":
+ #                          print "asdf",  i, dElement_Array['HH'][i], fCurrentTime, \
+ #                              dElement_Array[sElement][i]
                     else:
                         # multicol
                         # FFTODO optimisation could probably be done here

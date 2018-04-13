@@ -183,12 +183,12 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         Parameters:
         wf_controlled_data (metro_data) : controlled data. Read-only
         """
-        npTime = wf_controlled_data.get_matrix_col('TimeSecond') 
+        npTimeSecond = wf_controlled_data.get_matrix_col('TimeSecond') 
 
         # Only interpolate if IR is given
         if  metro_config.get_value('IR'):
             npIR = wf_controlled_data.get_matrix_col('IR')
-            npIR2 = metro_util.interpolate(npTime, npIR)
+            npIR2 = metro_util.interpolate(npTimeSecond, npIR)
             wf_interpolated_data.append_matrix_col('IR', npIR2)
             return
         
@@ -196,7 +196,7 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         (npCoeff1, npCoeff2) = metro_physics.get_cloud_coefficient(npCloudOctal)
         npAT = wf_controlled_data.get_matrix_col('AT')
         npIR = npCoeff1*npAT+npCoeff2
-        npIR2 = metro_util.interpolate(npTime, npIR)
+        npIR2 = metro_util.interpolate(npTimeSecond, npIR)
         wf_controlled_data.append_matrix_col('IR', npIR)
         wf_interpolated_data.append_matrix_col('IR', npIR2)
 
@@ -207,12 +207,12 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         Parameters:
         wf_controlled_data (metro_data) : controlled data. Read-only
         """
-        npTime = wf_controlled_data.get_matrix_col('TimeSecond') 
+        npTimeSecond = wf_controlled_data.get_matrix_col('TimeSecond') 
 
         # Only interpolate if SF is given
         if  metro_config.get_value('SF'):
             npSF = wf_controlled_data.get_matrix_col('SF')
-            npSF2 = metro_util.interpolate(npTime, npSF)
+            npSF2 = metro_util.interpolate(npTimeSecond, npSF)
             if ((self.infdata_exist('HORIZON')) and (self.npAzim != None)):
 	    	npFT2 = wf_interpolated_data.get_matrix_col('FORECAST_TIME')
 		tDate2 = [time.gmtime(x) for x in npFT2]
@@ -238,7 +238,7 @@ class Metro_preprocess_fsint2(Metro_preprocess):
                                     self.fSunrise, self.fSunset,\
                                     self.fLat, self.fLon)
 
-	npSF2  = metro_util.interpolate(npTime, npSF)
+	npSF2  = metro_util.interpolate(npTimeSecond, npSF)
 
         if ((self.infdata_exist('HORIZON')) and (self.npAzim != None)):
 	    npFT2 = wf_interpolated_data.get_matrix_col('FORECAST_TIME')
@@ -262,11 +262,11 @@ class Metro_preprocess_fsint2(Metro_preprocess):
         wf_controlled_data (metro_data) : controlled data. Read-only
         """
         if metro_config.get_value('SF') and metro_config.get_value('IR'):
-            npTime = wf_controlled_data.get_matrix_col('Time') 
+            npTimeSecond = wf_controlled_data.get_matrix_col('TimeSecond') 
             npCloudOctal = wf_controlled_data.get_matrix_col('CC')
             nLength = len(npCloudOctal)
             npCloud = numpy.ones(nLength) * (-1)
-            npCloud2  = metro_util.interpolate(npTime, npCloud)
+            npCloud2  = metro_util.interpolate(npTimeSecond, npCloud)
             
             wf_controlled_data.set_matrix_col('CC', npCloud)
             wf_interpolated_data.set_matrix_col('CC',  npCloud2)

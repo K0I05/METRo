@@ -127,7 +127,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
         """
 
         # Set the time in the interpolated matrix.
-        npTime =  ro_controlled_data.get_matrix_col('Time')
+        npTime =  ro_controlled_data.get_matrix_col('TimeSecond')
         self.npTimeInterpolated = numpy.arange(npTime[0], \
                                                npTime[len(npTime)-1],
                                                metro_constant.fTimeStep)
@@ -174,7 +174,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
 
         Description: Does the interpolation of the air temperature
         """
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npAT = ro_controlled_data.get_matrix_col('AT')
         npAT = metro_util.interpolate(npTimeOrig, npAT)
         ro_interpolated_data.append_matrix_col('AT', npAT)
@@ -202,7 +202,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
         Author		Date		Reason
         Miguel Tremblay      August 5th 2004
         """
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npTD = ro_controlled_data.get_matrix_col('TD')
         npTD = metro_util.interpolate(npTimeOrig, npTD)
         ro_interpolated_data.append_matrix_col('TD', npTD)
@@ -231,7 +231,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
         Author		Date		Reason
         Miguel Tremblay      August 11th 2004
         """
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npWS = ro_controlled_data.get_matrix_col('WS')*0.2777777
         npWS = metro_util.interpolate(npTimeOrig, npWS)
         ro_interpolated_data.append_matrix_col('WS', npWS)
@@ -260,7 +260,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
         Miguel Tremblay      August 11th 2004
         """
         
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npST = ro_controlled_data.get_matrix_col('ST')
         npST = metro_util.interpolate(npTimeOrig, npST)
         ro_interpolated_data.append_matrix_col('ST', npST)
@@ -282,7 +282,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
         Description: Does the interpolation of road temperature under the surface.
         """
         
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npSST = ro_controlled_data.get_matrix_col('SST')
 
         npSST = metro_util.interpolate(npTimeOrig, npSST)
@@ -306,7 +306,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
          Description: Does the interpolation of presence of precipitation.
          """
         
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npPI = ro_controlled_data.get_matrix_col('PI')
         npPI = numpy.where(npPI != 1, 0, npPI)
         npPI = metro_util.interpolate(npTimeOrig, npPI)
@@ -342,7 +342,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
           Miguel Tremblay      August 12th 2004
           """
         
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npSC = ro_controlled_data.get_matrix_col('SC')
         # Convert
         npSC = numpy.where(npSC == 33, 0, 1)
@@ -375,7 +375,7 @@ class Metro_preprocess_interpol_observation(Metro_preprocess):
 
         """
         
-        npTimeOrig = ro_controlled_data.get_matrix_col('Time')
+        npTimeOrig = ro_controlled_data.get_matrix_col('TimeSecond')
         npSST = observation_data.get_attribute('SST_VALID')
         npAT = observation_data.get_attribute('AT_VALID')
         npTD = observation_data.get_attribute('TD_VALID')
