@@ -59,7 +59,7 @@ from toolbox import metro_constant
 ##
 # Class attributes
 ##
-npTime = None # Array representing the time in seconds.
+npTimeSecond = None # Array representing the time in seconds.
 
 
 class Metro_preprocess_interpol_forecast(Metro_preprocess):
@@ -124,7 +124,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         nHourStart = int(metro_date.get_hour(npFT[0]))
         nbrHours = metro_date.get_elapsed_time(npFT[-1], \
                                                npFT[0]) + 1
-        self.npTime = numpy.arange(0, nbrHours, dtype=numpy.float)*3600 
+        self.npTimeSecond = numpy.arange(0, nbrHours, dtype=numpy.float)*3600 
 
         npTimeAtHours = numpy.arange(0,nbrHours, dtype=numpy.float) + nHourStart
         wf_controlled_data.append_matrix_col('Hour', npTimeAtHours)
@@ -155,21 +155,21 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
          """
         
         npFT = wf_original_data.get_matrix_col('FORECAST_TIME')
-        npFT = metro_util.interpolate(self.npTime, npFT)
+        npFT = metro_util.interpolate(self.npTimeSecond, npFT)
                                       
         wf_interpolated_data.append_matrix_col('FORECAST_TIME', npFT)
         
         nHourStart = int(metro_date.get_hour(npFT[0]))
         # A strange trick of copying the NumPy array locally to set it in the matrix
-        #  must be done (if I remember well), because otherwhise the array are not included
-        #  in the matrix. It might be because NumPy made use of pointers.
-        npTime = self.npTime
-        print "npTime", npTime
-        wf_controlled_data.append_matrix_col('TimeSecond', npTime)
-        npTime = metro_util.interpolate(self.npTime, npTime)
-        npTime = (npTime+30)/3600+nHourStart
-        print "npTime", npTime
-        wf_interpolated_data.append_matrix_col('TimeHour', npTime)
+        #  must be done (if I remember well), because otherwhise the array is not included
+        #  in the matrix. It might be because NumPy uses pointers.
+        npTimeSecond = self.npTimeSecond
+        wf_controlled_data.append_matrix_col('TimeSecond', npTimeSecond)
+        npTimeSecond = metro_util.interpolate(self.npTimeSecond, npTimeSecond)
+        # ICITTE: pourquoi + 30 ???
+        npTimeHour = (npTimeSecond+30)/3600+nHourStart
+#        npTimeHour = npTimeSecond/3600+nHourStart
+        wf_interpolated_data.append_matrix_col('TimeHour', npTimeHour)
 
 
 
@@ -197,7 +197,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         """
         
         npAT = wf_originpl_data.get_matrix_col('AT')
-        npAT = metro_util.interpolate(self.npTime, npAT)
+        npAT = metro_util.interpolate(self.npTimeSecond, npAT)
         wf_interpolated_data.append_matrix_col('AT', npAT)
 
         
@@ -240,9 +240,9 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         npRA = npRA - metro_util.shift_right(npRA, 0)
 
         # Interpolate these values at each time step
-        npQP = metro_util.interpolate(self.npTime, npQP)
-        npSN = metro_util.interpolate(self.npTime, npSN)
-        npRA = metro_util.interpolate(self.npTime, npRA)
+        npQP = metro_util.interpolate(self.npTimeSecond, npQP)
+        npSN = metro_util.interpolate(self.npTimeSecond, npSN)
+        npRA = metro_util.interpolate(self.npTimeSecond, npRA)
 
         # Shift all the values to have them started at the right time
         npQP =  metro_util.shift_left(npQP, 0)
@@ -283,7 +283,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         Miguel Tremblay      July 12th 2004
         """
         npWS = wf_originpl_data.get_matrix_col('WS')*0.2777777
-        npWS = metro_util.interpolate(self.npTime, npWS)
+        npWS = metro_util.interpolate(self.npTimeSecond, npWS)
         wf_interpolated_data.append_matrix_col('WS', npWS)
         
 
@@ -311,7 +311,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         Miguel Tremblay      July 12th 2004
         """
         npTD = wf_originpl_data.get_matrix_col('TD')
-        npTD = metro_util.interpolate(self.npTime, npTD)
+        npTD = metro_util.interpolate(self.npTimeSecond, npTD)
         wf_interpolated_data.append_matrix_col('TD', npTD)
 
         
@@ -348,7 +348,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         
         # Convert it in pascals.
         npAP = npAP*100
-        npAP = metro_util.interpolate(self.npTime, npAP)
+        npAP = metro_util.interpolate(self.npTimeSecond, npAP)
         wf_interpolated_data.append_matrix_col('AP', npAP)
 
 
@@ -402,7 +402,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         npPI = numpy.array(lPI)
             
         # Interpolate
-        npPI = metro_util.interpolate(self.npTime, npPI)
+        npPI = metro_util.interpolate(self.npTimeSecond, npPI)
         # Round
         npPI = numpy.around(npPI)
         # Store
@@ -433,7 +433,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         npCC = numpy.array(lCC)
             
         # Interpolate
-        npCC = metro_util.interpolate(self.npTime, npCC)
+        npCC = metro_util.interpolate(self.npTimeSecond, npCC)
 
         # Round
         npCC = numpy.around(npCC)
@@ -469,8 +469,8 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
             npFA = wf_originpl_data.get_matrix_col('FA')
         # If anthropogenic flux is not specified, FA is set to a constant value of 10 W/m^2
         else:
-            npFA = numpy.empty(self.npTime.size);
+            npFA = numpy.empty(self.npTimeSecond.size);
             npFA.fill (10);
 
-        npFA = metro_util.interpolate(self.npTime, npFA)
+        npFA = metro_util.interpolate(self.npTimeSecond, npFA)
         wf_interpolated_data.append_matrix_col('FA', npFA)

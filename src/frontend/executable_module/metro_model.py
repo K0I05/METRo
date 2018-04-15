@@ -238,7 +238,7 @@ class Metro_model(Metro_module):
         
 
         # Number of 30 seconds step.
-        npFT = wf_interpolated_data.get_matrix_col('TimeHour')
+#        npFT = wf_interpolated_data.get_matrix_col('TimeHour')
         nNbrTimeSteps = self.__get_nb_timesteps(forecast)
         lAH = wf_interpolated_data.get_matrix_col('AH').tolist()
 
@@ -246,14 +246,16 @@ class Metro_model(Metro_module):
         ro_interpolated_data = observation.get_interpolated_data()
         lAT_obs = ro_interpolated_data.get_matrix_col('AT').tolist()
         lST_obs =  ro_interpolated_data.get_matrix_col('ST').tolist()
-
-        # DEBUG
-#        for i in range(len(lST_obs)):
- #           print "npFT", i, npFT[i]
-  #          print  "ST obs", lST_obs[i]
             
         lSST_obs =  ro_interpolated_data.get_matrix_col('SST').tolist()
         lTime_obs = ro_interpolated_data.get_matrix_col('TimeHour').tolist()
+
+        # DEBUG
+#        for i in range(len(lST_obs)):
+#            print i, round(lTime_obs[i],2), round(lST_obs[i],2)
+
+
+        
         # Deep soil value given in command line
         bDeepTemp = metro_config.get_value('DEEP_SOIL_TEMP')
         dDeepTemp =  float(metro_config.get_value('DEEP_SOIL_TEMP_VALUE'))
@@ -317,6 +319,9 @@ class Metro_model(Metro_module):
                                    _("Start sending data to METRo core"))
 
         bEchec = []
+
+        # DEBUG
+        print "Delta", fDeltaTMetroObservation
 
         macadam.Do_Metro(bFlat, fLat, fLon, lLayerThick, \
                          nNbrOfLayer, lLayerType, lAT, lQP, \
@@ -389,8 +394,7 @@ class Metro_model(Metro_module):
 
         # DEBUG
 #        for i in range(len(lST)):
-#            lST[i] = 
- #           print "ST", i, lST[i]
+#           print "ST", i, lST[i]
 
         if metro_config.get_value('TL') == True:
             # Temperature of levels under the ground.
@@ -421,10 +425,12 @@ class Metro_model(Metro_module):
         #  Il y a eu un probleme dans la conversion entre le C et le fortran
         #  qui fait en sorte qu'il y a un decalage d'un indice.  Il faudra que
         #  ce soit corrige.
-        npRT = wf_data.get_matrix_col('FORECAST_TIME')[:iNb_timesteps]
+        #  ICITTE
+        npRT = wf_data.get_matrix_col('FORECAST_TIME')[:iNb_timesteps]        
         npRT = npRT + 30
-        npHH = wf_data.get_matrix_col('TimeHour')[:iNb_timesteps]
-        print "npHH", npHH
+        npHH = wf_data.get_matrix_col('TimeHour')[:iNb_timesteps] #+ 3 + 55/60.0
+#        print "npHH", npHH
+#        print "npHH", npRT[0] + fObservation_delta_t*3600
         npAT = wf_data.get_matrix_col('AT')[:iNb_timesteps]
         npFA = wf_data.get_matrix_col('FA')[:iNb_timesteps]
         # 3.6 is to convert from m/s to km/h
@@ -460,6 +466,13 @@ class Metro_model(Metro_module):
         roadcast.set_matrix_col('CC', npCC)
         roadcast.set_matrix_col('SST', lSST)
 
+        # DEBUG
+#        print len(lST), len(npHH)
+        for i in range(len(lST)):
+            print "ST", i, round(npHH[i],2), round(lST[i],2)
+
+
+        
         if metro_config.get_value('TL') == True:
             roadcast.append_matrix_multiCol('TL', lTL)
 
