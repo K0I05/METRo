@@ -238,7 +238,6 @@ class Metro_model(Metro_module):
         
 
         # Number of 30 seconds step.
-#        npFT = wf_interpolated_data.get_matrix_col('TimeHour')
         nNbrTimeSteps = self.__get_nb_timesteps(forecast)
         lAH = wf_interpolated_data.get_matrix_col('AH').tolist()
 
@@ -250,12 +249,6 @@ class Metro_model(Metro_module):
         lSST_obs =  ro_interpolated_data.get_matrix_col('SST').tolist()
         lTime_obs = ro_interpolated_data.get_matrix_col('TimeHour').tolist()
 
-        # DEBUG
-#        for i in range(len(lST_obs)):
-#            print i, round(lTime_obs[i],2), round(lST_obs[i],2)
-
-
-        
         # Deep soil value given in command line
         bDeepTemp = metro_config.get_value('DEEP_SOIL_TEMP')
         dDeepTemp =  float(metro_config.get_value('DEEP_SOIL_TEMP_VALUE'))
@@ -319,9 +312,6 @@ class Metro_model(Metro_module):
                                    _("Start sending data to METRo core"))
 
         bEchec = []
-
-        # DEBUG
-        print "Delta", fDeltaTMetroObservation
 
         macadam.Do_Metro(bFlat, fLat, fLon, lLayerThick, \
                          nNbrOfLayer, lLayerType, lAT, lQP, \
@@ -392,10 +382,6 @@ class Metro_model(Metro_module):
         lFP = (macadam.get_fp())[:iNb_timesteps]
         lSST =  (macadam.get_sst())[:iNb_timesteps]
 
-        # DEBUG
-#        for i in range(len(lST)):
-#           print "ST", i, lST[i]
-
         if metro_config.get_value('TL') == True:
             # Temperature of levels under the ground.
             nNbrVerticalLevel = macadam.get_nbr_levels()
@@ -465,12 +451,6 @@ class Metro_model(Metro_module):
         roadcast.set_matrix_col('FP', lFP)
         roadcast.set_matrix_col('CC', npCC)
         roadcast.set_matrix_col('SST', lSST)
-
-        # DEBUG
-#        print len(lST), len(npHH)
-        for i in range(len(lST)):
-            print "ST", i, round(npHH[i],2), round(lST[i],2)
-
 
         
         if metro_config.get_value('TL') == True:
