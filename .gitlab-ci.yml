@@ -8,7 +8,6 @@ test:
   - python3 --version
   - ./setup.sh /usr/local
   - cd /usr/local/metro
-  - ./init_devel.sh
   - cd /usr/local/metro/usr/bin
   - python3 ./metro --selftest
   - diff --ignore-matching-lines=".*<production-date>.*</production-date>" ../share/metro/data/selftest/roadcast.xml ../share/metro/data/selftest/roadcast_reference.xml
