@@ -421,7 +421,7 @@ def main():
                 #                                                                       file_station_path,
                 #                                                                       file_observation_path,
                 #                                                                       file_output_path)
-                command_to_run = 'python3 usr/local/metro/usr/bin/metro.py {} --input-forecast {} --input-station {} ' \
+                command_to_run = 'python3 usr/local/metro/usr/bin/metro {} --input-forecast {} --input-station {} ' \
                                  '--input-observation {} --output-roadcast {}'.format(extra_parameter,
                                                                                       file_forecast_path,
                                                                                       file_station_path,
