@@ -11,4 +11,4 @@ test:
   - python3 ./metro --selftest
   - diff --ignore-matching-lines=".*<production-date>.*</production-date>" ../share/metro/data/selftest/roadcast.xml ../share/metro/data/selftest/roadcast_reference.xml
   - cd /usr/local/metro/usr/share/metro/data/test_suite
-  - python3 test_suite.py -v
+  - python3 test_suite.py
