@@ -14,5 +14,5 @@ test:
   - cd /usr/local/metro/usr/share/metro/data/test_suite
   - ls -l
   - python3 test_suite.py -v
-  - cd ../../../../src/frontend
+  - cd ../../../../../src/frontend
   - ls -l
