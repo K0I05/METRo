@@ -54,7 +54,7 @@ class Metro_read(Metro_module):
     def _read_input_data(self, sFilename):
         # read forecast
         try:
-            input = open(sFilename, 'r')
+            input = open(sFilename, mode='r', encoding='utf-8')
             inputForecast = input.read()
             input.close()
         except IOError as sError:
