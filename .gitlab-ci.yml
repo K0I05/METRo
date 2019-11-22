@@ -13,4 +13,4 @@ test:
   - cd /usr/local/metro/usr/share/metro/data/test_suite
   - ls -l
   - pwd
-  - python3 ./test_suite.py -v
+  - python3 test_suite.py -v
