@@ -141,8 +141,8 @@ class XmlTree:
                 print('tail: {} != {}.'.format(xml_file1.tail, xml_file2.tail))
             return False
 
-        child1 = xml_file1.getchildren()
-        child2 = xml_file2.getchildren()
+        child1 = list(xml_file1)
+        child2 = list(xml_file2)
         if len(child1) != len(child2):
             if display_info:
                 print('children length differs, {} != {}.'.format(len(child1), len(child2)))
@@ -421,6 +421,7 @@ def main():
                 #                                                                       file_station_path,
                 #                                                                       file_observation_path,
                 #                                                                       file_output_path)
+                # .gitlab-ci.yml version
                 command_to_run = 'python3 ../../metro.py {} --input-forecast {} --input-station {} ' \
                                  '--input-observation {} --output-roadcast {}'.format(extra_parameter,
                                                                                       file_forecast_path,
