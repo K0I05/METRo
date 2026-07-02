@@ -548,7 +548,9 @@ def init_translation(sFilename):
         Author		          Date		            Reason
         Miguel Tremblay       November 8th 2004
     """
-    t = gettext.translation(sFilename, get_metro_root_path() + '/usr/share/locale')
+    # fallback=True: modules without a pre-built .mo (e.g. newly added ones) get an
+    # identity translation instead of crashing METRo entirely.
+    t = gettext.translation(sFilename, get_metro_root_path() + '/usr/share/locale', fallback=True)
     _t_ = t.gettext
     return _t_
 

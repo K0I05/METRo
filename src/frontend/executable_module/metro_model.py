@@ -36,6 +36,7 @@ import metro_config
 from toolbox import metro_util
 from toolbox import metro_date
 from toolbox import metro_constant
+from toolbox import metro_grip
 from data_module import metro_data_collection_output
 from data_module import metro_data
 from data_module import metro_infdata
@@ -315,6 +316,21 @@ class Metro_model(Metro_module):
                 end = begin + nNbrVerticalLevel
                 lTL.append(lTmpTL[begin:end])
 
+        if metro_config.get_value('GRIP'):
+            # Effective freezing point of water (0.0 unless --use-freezing-point-forecast is used).
+            npTFZ = wf_data.get_matrix_col('TFZ')[:iNb_timesteps]
+            lGrip = [metro_grip.compute_grip(lRC[i], lRA[i], lSN[i], lST[i], npTFZ[i])
+                     for i in range(iNb_timesteps)]
+
+        if metro_config.get_value('PRECIP_TYPE'):
+            # 1=rain, 2=snow, 3=freezing rain/drizzle (see metro_preprocess_interpol_forecast.py:
+            # PI/PI_FREEZING are combined here, after their own interpolation/rounding is already
+            # done, rather than encoding a 3rd value directly into PI's own interpolation).
+            npPrecip = wf_data.get_matrix_col('PI')[:iNb_timesteps].astype(numpy.int32)
+            npFreezing = wf_data.get_matrix_col('PI_FREEZING')[:iNb_timesteps].astype(numpy.int32)
+            lPrecipType = [3 if (pi == 1 and freezing == 1) else int(pi)
+                           for pi, freezing in zip(npPrecip.tolist(), npFreezing.tolist())]
+
         # Adding the information to the header
         roadcast.set_header_value('VERSION', sRoadcast_version)
         roadcast.set_header_value('ROAD_STATION', sRoadcast_station)
@@ -369,6 +385,12 @@ class Metro_model(Metro_module):
 
         if metro_config.get_value('TL'):
             roadcast.append_matrix_multiCol('TL', lTL)
+
+        if metro_config.get_value('GRIP'):
+            roadcast.append_matrix_col('GRIP', lGrip)
+
+        if metro_config.get_value('PRECIP_TYPE'):
+            roadcast.append_matrix_col('PRECIP_TYPE', lPrecipType)
 
         # Creation of the object Metro_data_collection for the roadcast
         lStandard_attributes = metro_config.get_value('DATA_ATTRIBUTE_ROADCAST_STANDARD')

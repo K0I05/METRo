@@ -61,7 +61,7 @@ msgid ""
 "%s"
 msgstr ""
 "'%s' is not a valid key. Valid keys are:\n"
-"%"
+"%s"
 
 #: src/frontend/data_module/metro_data.py:406
 msgid "All the data are invalid"

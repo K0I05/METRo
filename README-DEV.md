@@ -84,6 +84,125 @@ new materials within (or close to) this range.
 
 Non-'custom' layers ignore <capacity>/<conductivity> if present.
 
+Grip / traction index
+-----------------------
+The roadcast can optionally include a grip index (0.0 = essentially no
+traction, 1.0 = dry bare pavement) for every prediction, derived from the
+road condition code (RC), water/ice depth and surface temperature METRo
+already computes. This is the same approach used by commercial pavement
+sensors (e.g. Lufft IRS31/NIRS31): grip is never physically measured, it is
+derived from lookup tables and empirical thresholds over surface state.
+
+1) Run METRo with the option --output-grip-index :
+
+    metro --output-grip-index --input-forecast forecast.xml \
+          --input-observation observation.xml --input-station station.xml \
+          --output-roadcast roadcast.xml
+
+2) The roadcast gains a <grip> element per prediction:
+
+    <prediction>
+        <roadcast-time>2018-03-27T15:20Z</roadcast-time>
+        ...
+        <rc>7</rc>
+        <grip>0.28</grip>
+    </prediction>
+
+If the option is not used, roadcast.xml is unchanged (no <grip> element),
+i.e. the previous behaviour is unchanged.
+
+If --use-freezing-point-forecast (see above) is also used, grip already
+accounts for it: a salted/treated road (lower effective freezing point)
+keeps a higher grip value for longer below 0 C, since grip is computed from
+the same RC/temperature values that already reflect the depressed freezing
+point.
+
+STATUS: the grip formula and its constants (src/frontend/toolbox/metro_grip.py)
+are a first pass, not yet validated against real observations. They encode a
+plausible qualitative shape (dry > wet > melting snow > mix > ice/frost >
+icing rain; ice friction worst near the freezing point, recovering somewhat
+when colder) but the actual numbers were not calibrated against any sensor
+or field data. Treat grip output as provisional until validated.
+
+JSON roadcast output
+-----------------------
+The roadcast can optionally also be written as JSON, alongside the existing
+XML file, for anyone consuming METRo output today.
+
+    metro --output-roadcast-json roadcast.json --input-forecast forecast.xml \
+          --input-observation observation.xml --input-station station.xml \
+          --output-roadcast roadcast.xml
+
+Produces a file shaped like:
+
+    {
+      "header": {"version": "1.6", "road-station": "rsy", ...},
+      "prediction-list": [
+        {"roadcast-time": "2018-03-27T15:20Z", "rc": 1, "st": -0.83, ...},
+        ...
+      ]
+    }
+
+Field names match the XML tags exactly. If --output-roadcast-json is not
+given, no JSON file is written and XML output is unchanged.
+
+Limitation: multi-value fields (currently only TL / --output-subsurface-levels)
+are not supported in JSON output and are skipped with a warning if present.
+
+Refined precipitation type (freezing rain/drizzle)
+-----------------------------------------------------
+METRo's atmospheric forecast internally classifies each timestep's
+precipitation as rain (1) or snow (2), based on which of <ra>/<sn> is
+increasing (falling back to air temperature when neither is). This has no
+freezing rain/drizzle distinction: liquid precipitation falling at a
+subfreezing air temperature was simply "rain". This does not change how
+the road model computes the icing-rain road condition (that already comes
+from the road surface's own temperature relative to the freezing point,
+independently of the precipitation label) - it only adds visibility into
+*why* the road turned icy.
+
+Enable it to add a diagnostic <precip-type> field (1=rain, 2=snow,
+3=freezing rain/drizzle) to the roadcast:
+
+    metro --output-precip-type --input-forecast forecast.xml \
+          --input-observation observation.xml --input-station station.xml \
+          --output-roadcast roadcast.xml
+
+If not used, roadcast.xml is unchanged.
+
+Config file as JSON
+-----------------------
+--config and --generate-config now also accept a JSON file, detected by the
+.json extension - no new command line option needed:
+
+    metro --generate-config myconfig.json ...
+    metro --config myconfig.json --input-forecast forecast.xml ...
+
+A JSON config file is a flat {"KEY": value} object (see myconfig.json after
+running --generate-config for the full list of keys). Anything with a
+non-.json extension is still read/written as the original Plist-XML format.
+Note JSON has no comment syntax, so unlike the Plist-XML writer, the
+generated JSON file does not include the per-key COMMENTS documentation.
+
+Unit tests
+-----------------------
+tests/ has stdlib-unittest coverage (no new dependency - the CI environment
+does not install pytest) for a few individual modules previously only
+exercised end-to-end through test_suite.py's XML-diff regression cases:
+config merging (metro_config.overlay_config), the Metro_data matrix
+operations (append/get/set/del column and row), a handful of metro_util
+helpers, and the grip formula.
+
+Run with:
+
+    python3 -m unittest discover -s tests -t .
+
+tests/__init__.py sets up sys.path and import order deliberately: metro_util.py
+and metro_error.py import each other, and importing metro_util.py directly as
+the very first module in a process crashes (AttributeError, circular import) -
+see the comment in tests/__init__.py for why, and don't change that import
+order without understanding it first.
+
 
 =======================
 == Compiling "model" ==

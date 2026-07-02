@@ -319,6 +319,31 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
 
             Description: Interpolate the type of precipitation.  The nearest neighbor is used.
 
+                         PI itself stays a 2-value code (1=rain, 2=snow): it
+                         is linearly interpolated then rounded, which only
+                         gives a valid result because there are exactly 2
+                         adjacent values (any interpolated fraction between
+                         1 and 2 rounds back to 1 or 2). A 3rd category
+                         cannot be added the same way: interpolating between
+                         codes 1 and 3 can produce a spurious intermediate
+                         value of exactly 2 (snow) once rounded, which would
+                         be wrong. So the "is this liquid precipitation
+                         falling with an air temperature at/below freezing"
+                         refinement is tracked separately as PI_FREEZING (0
+                         or 1), which keeps the same 2-value safety.
+                         PI_FREEZING has no effect on the METRo core: it is
+                         purely diagnostic, combined with PI at roadcast-build
+                         time (see metro_model.py) into a refined precip-type
+                         value (1=rain, 2=snow, 3=freezing rain/drizzle) only
+                         used for --output-precip-type. The road energy
+                         balance itself already treats freezing rain the same
+                         as rain (both are liquid water hitting the surface);
+                         the surface phase-change logic (using the same
+                         freezing point as --use-freezing-point-forecast)
+                         determines the icing-rain road condition from
+                         surface temperature, independently of how the
+                         precipitation itself is labelled.
+
             Revision History:
 
             Author		          Date		        Reason
@@ -336,24 +361,33 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         npDiffRA = npRA - metro_util.shift_right(npRA, 0)
         npDiffSN = npSN - metro_util.shift_right(npSN, 0)
         lPI = []
+        lFreezing = []
 
         for i in range(0, len(npDiffRA)):
             if npDiffRA[i] > 0:
                 lPI.append(1)
+                lFreezing.append(1 if npAT[i] <= 0 else 0)
             elif npDiffSN[i] > 0:
                 lPI.append(2)
+                lFreezing.append(0)
             elif npAT[i] > 0:
                 lPI.append(1)
+                lFreezing.append(0)
             else:
                 lPI.append(2)
+                lFreezing.append(0)
         npPI = numpy.array(lPI)
+        npFreezing = numpy.array(lFreezing)
 
         # Interpolate
         npPI = metro_util.interpolate(self.npTime, npPI)
+        npFreezing = metro_util.interpolate(self.npTime, npFreezing)
         # Round
         npPI = numpy.around(npPI)
+        npFreezing = numpy.around(npFreezing)
         # Store
         wf_interpolated_data.append_matrix_col('PI', npPI)
+        wf_interpolated_data.append_matrix_col('PI_FREEZING', npFreezing)
 
     def __interpolate_CC(self, wf_originpl_data, wf_interpolated_data):
         """

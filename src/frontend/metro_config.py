@@ -42,6 +42,7 @@
 
 import sys
 import getopt
+import json
 import metro_logger
 from toolbox import metro_config_validation
 from toolbox import metro_xml_dtd
@@ -75,6 +76,7 @@ CFG_LONG_OPTIONS = ["help", "version",
                     "input-forecast=", "input-observation=",
                     "input-station=",
                     "output-roadcast=",
+                    "output-roadcast-json=",
                     "bypass-core",
                     "generate-dtd-catalog",
                     "config=", "generate-config=", "log-file=", "verbose-level=",
@@ -86,8 +88,14 @@ CFG_LONG_OPTIONS = ["help", "version",
                     "enable-sunshadow",
                     "sunshadow-method=",
                     "output-subsurface-levels",
+                    "output-grip-index",
+                    "output-precip-type",
                     "fix-deep-soil-temperature="]
 dConfig = {}
+
+
+def _is_json_config_filename(sFilename):
+    return sFilename.lower().endswith('.json')
 
 
 def read_config_file(sFilename):
@@ -100,28 +108,49 @@ def read_config_file(sFilename):
         metro_logger.print_init_message(metro_logger.LOGGER_INIT_ERROR, sIOError)
         sys.exit(2)  # Exit with command line syntax errors.
     else:
-        plreader = plist_reader.Plist_reader()
-        try:
-            dConf = plreader.read(sConfig_file)
-        except:
-            dConf = {}
-            sError = _("Error when reading METRo configuration\n") + \
-                     _("file:'%s'. Please make sure that the file\nhave ") % sFilename + \
-                     _("valid XML syntax and is not corrupted. You can ") + \
-                     _("check it with the command 'xmllint %s'. You can\n") % sFilename + \
-                     _("also generated a new one with the option: %s.\n") % "--generate-config"
-            metro_logger.print_init_message(metro_logger.LOGGER_INIT_ERROR, sError)
-            sys.exit(2)
+        if _is_json_config_filename(sFilename):
+            try:
+                dConf = json.loads(sConfig_file)
+            except ValueError as sError:
+                dConf = {}
+                sError = _("Error when reading METRo configuration\n") + \
+                         _("file:'%s'. Please make sure that the file\nhave ") % sFilename + \
+                         _("valid JSON syntax and is not corrupted.\n") + \
+                         _("The following error occurred:\n%s") % sError
+                metro_logger.print_init_message(metro_logger.LOGGER_INIT_ERROR, sError)
+                sys.exit(2)
+            else:
+                sSuccess = _("Configuration file:'%s' loaded with success") % sFilename
+                metro_logger.print_init_message(metro_logger.LOGGER_INIT_SUCCESS, sSuccess)
         else:
-            sSuccess = _("Configuration file:'%s' loaded with success") % sFilename
-            metro_logger.print_init_message(metro_logger.LOGGER_INIT_SUCCESS, sSuccess)
+            plreader = plist_reader.Plist_reader()
+            try:
+                dConf = plreader.read(sConfig_file)
+            except:
+                dConf = {}
+                sError = _("Error when reading METRo configuration\n") + \
+                         _("file:'%s'. Please make sure that the file\nhave ") % sFilename + \
+                         _("valid XML syntax and is not corrupted. You can ") + \
+                         _("check it with the command 'xmllint %s'. You can\n") % sFilename + \
+                         _("also generated a new one with the option: %s.\n") % "--generate-config"
+                metro_logger.print_init_message(metro_logger.LOGGER_INIT_ERROR, sError)
+                sys.exit(2)
+            else:
+                sSuccess = _("Configuration file:'%s' loaded with success") % sFilename
+                metro_logger.print_init_message(metro_logger.LOGGER_INIT_SUCCESS, sSuccess)
     return dConf
 
 
 def write_config_file(sFilename, bFull_config=False):
-    plwriter = plist_writer.Plist_writer()
     try:
-        plwriter.write(sFilename, dConfig, True, bFull_config)
+        if _is_json_config_filename(sFilename):
+            iThreshold = -1 if bFull_config else 0
+            dOutput = {sKey: dConfig[sKey]['VALUE'] for sKey in dConfig if dConfig[sKey]['FROM'] > iThreshold}
+            with open(sFilename, 'w') as pFile:
+                json.dump(dOutput, pFile, indent=2, sort_keys=True)
+        else:
+            plwriter = plist_writer.Plist_writer()
+            plwriter.write(sFilename, dConfig, True, bFull_config)
     except IOError as sError:
         sError = _("Unable to write to file '%s', the following\n") % sFilename + _("error occurred: %s") % sError
         metro_logger.print_init_message(metro_logger.LOGGER_INIT_ERROR, sError)
@@ -311,6 +340,9 @@ def save_command_line_parameter(lArgv, sShort_opt, lLong_opt):
         if o == "--output-roadcast":
             dConf['FILE_ROADCAST_FILENAME'] = a
 
+        if o == "--output-roadcast-json":
+            dConf['FILE_ROADCAST_JSON_FILENAME'] = a
+
         if o == "--use-infrared-forecast":
             dConfig['IR']['VALUE'] = True
 
@@ -406,6 +438,25 @@ def save_command_line_parameter(lArgv, sShort_opt, lLong_opt):
 
             dConfig['XML_ROADCAST_PREDICTION_EXTENDED_ITEMS']['VALUE'].append(dTL)
 
+        if o == "--output-grip-index":
+            dConfig['GRIP']['VALUE'] = True
+
+            dGrip = {'NAME': "GRIP",
+                     'XML_TAG': "grip",
+                     'DATA_TYPE': "REAL",
+                     'PRECISION': 2}
+
+            dConfig['XML_ROADCAST_PREDICTION_EXTENDED_ITEMS']['VALUE'].append(dGrip)
+
+        if o == "--output-precip-type":
+            dConfig['PRECIP_TYPE']['VALUE'] = True
+
+            dPrecipType = {'NAME': "PRECIP_TYPE",
+                           'XML_TAG': "precip-type",
+                           'DATA_TYPE': "INTEGER"}
+
+            dConfig['XML_ROADCAST_PREDICTION_EXTENDED_ITEMS']['VALUE'].append(dPrecipType)
+
         # Selftest value
         if o == "--selftest":
             opts.append(("--output-subsurface-levels", ""))
@@ -492,6 +543,10 @@ def set_default_value():
     dConfig['FILE_ROADCAST_FILENAME'] = {'VALUE': "roadcast.xml",
                                          'FROM': CFG_HARDCODED,
                                          'COMMENTS': _("roadcast filename")}
+
+    dConfig['FILE_ROADCAST_JSON_FILENAME'] = {'VALUE': "",
+                                              'FROM': CFG_HARDCODED,
+                                              'COMMENTS': _("roadcast JSON filename, no JSON output if empty")}
 
     dConfig['FILE_ROADCAST_CURRENT_VERSION'] = {'VALUE': "1.6",
                                                 'FROM': CFG_INTERNAL,
@@ -1034,7 +1089,8 @@ def set_default_value():
                                                            "metro_postprocess_subsample_roadcast",
                                                            "metro_postprocess_round_roadcast",
                                                            "metro_metro2dom",
-                                                           "metro_write_roadcast"],
+                                                           "metro_write_roadcast",
+                                                           "metro_write_roadcast_json"],
 
                                                  'FROM': CFG_HARDCODED,
                                                  'COMMENTS': _("METRo module execution sequence")}
@@ -1082,6 +1138,15 @@ def set_default_value():
     dConfig['TL'] = {'VALUE': False,
                      'FROM': CFG_HARDCODED,
                      'COMMENTS': _("Output levels (TL) in roadcast")}
+
+    dConfig['GRIP'] = {'VALUE': False,
+                       'FROM': CFG_HARDCODED,
+                       'COMMENTS': _("Output grip/traction index (0.0-1.0) in roadcast")}
+
+    dConfig['PRECIP_TYPE'] = {'VALUE': False,
+                             'FROM': CFG_HARDCODED,
+                             'COMMENTS': _("Output refined precipitation type (1=rain, 2=snow, ") +
+                                         _("3=freezing rain/drizzle) in roadcast")}
 
     # ---------------------------- observation ---------------------------------
     dConfig['DEFAULT_OBSERVATION_HEADER_TIMEZONE'] = {'VALUE': 'UTC',
