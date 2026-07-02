@@ -312,7 +312,7 @@ class Metro_preprocess_combine(Metro_preprocess):
 
         # Create the array
         npAH = numpy.zeros(npLenAH)
-        npAH = npAH.astype(numpy.float)
+        npAH = npAH.astype(numpy.float64)
 
         for i in range(0, npLenAH):
             npAH[i] = metro_physics.foqst(npTD[i] + metro_constant.fTcdk, npAP[i])

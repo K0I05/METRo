@@ -98,7 +98,7 @@ class Metro_data:
 
         self.bRead_only = False
         self.dHeader = {}
-        self.npMatrix = numpy.array([], dtype=numpy.float)
+        self.npMatrix = numpy.array([], dtype=float)
 
         # Name of the columns of the matrix
         self.lMatrix_std_col_name = []

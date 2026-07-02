@@ -113,8 +113,8 @@ def get_sf(npCloudsOctal, npTimeHour, npForecastedTime, fSunriseTimeUTC, fSunset
         Return npSF (numpy array): Array containing the solar flux.
      """
     nTimeHourLength = len(npCloudsOctal)
-    npSft = numpy.zeros(nTimeHourLength, dtype=numpy.float)
-    npCoeff = numpy.zeros(nTimeHourLength, dtype=numpy.float)
+    npSft = numpy.zeros(nTimeHourLength, dtype=float)
+    npCoeff = numpy.zeros(nTimeHourLength, dtype=float)
 
     for i in range(len(npForecastedTime)):
         cTime = npForecastedTime[i]

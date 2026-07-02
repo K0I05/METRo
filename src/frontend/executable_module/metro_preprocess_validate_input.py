@@ -63,6 +63,7 @@ class Metro_preprocess_validate_input(Metro_preprocess):
         forecast_data = pForecast.get_data_collection()
         pObservation = self.get_infdata_reference('OBSERVATION')
         observation_data = pObservation.get_data_collection()
+        self.__truncate_observation_at_roadcast_start_date(observation_data.get_controlled_data())
         self.__validate_observation_length(observation_data.get_controlled_data())
         self.__validate_forecast_length(forecast_data.get_controlled_data())
         self.__validate_optional_args_forecast(forecast_data.get_controlled_data())
@@ -114,6 +115,47 @@ class Metro_preprocess_validate_input(Metro_preprocess):
                 sMessage = _("Atmospheric forecast must be at every hour.") + \
                            _(" Check file from %d hours after the start time.") % i
                 metro_logger.print_message(metro_logger.LOGGER_MSG_STOP, sMessage)
+
+    def __truncate_observation_at_roadcast_start_date(self, observation_data):
+        """
+            Parameters: controlled observation data
+
+            Description: If --roadcast-start-date (INIT_ROADCAST_START_DATE) is set to a
+                         date preceding the last observation, discard every observation
+                         that comes after that date. Without this, METRo would use
+                         observations the caller asked it to pretend are not known yet,
+                         which defeats the purpose of asking for an earlier roadcast
+                         start (e.g. reproducing what METRo would have forecast at that
+                         time, knowing only the observations available up to then).
+                         See https://framagit.org/metroprojects/metro/-/issues/13
+
+                         If the requested date is before the first observation or at/after
+                         the last one, there is nothing to truncate; existing behaviour
+                         (used as a pure output start filter) is preserved.
+        """
+        sRoadcast_start_date = metro_config.get_value('INIT_ROADCAST_START_DATE')
+        if sRoadcast_start_date == "":
+            return
+
+        fRoadcast_start_date = metro_date.parse_date_string(sRoadcast_start_date)
+        npOT = observation_data.get_matrix_col('OBSERVATION_TIME')
+        fFirst_observation_date = npOT[0]
+        fLast_observation_date = npOT[len(npOT) - 1]
+
+        if fRoadcast_start_date <= fFirst_observation_date or fRoadcast_start_date >= fLast_observation_date:
+            return
+
+        # Keep every observation up to and including the requested start date.
+        npIndexToKeep = numpy.nonzero(npOT <= fRoadcast_start_date)[0]
+        nLastIndexToKeep = npIndexToKeep[-1]
+
+        sMessage = _("--roadcast-start-date ('%s') precedes the last observation ('%s').\n") % \
+                   (sRoadcast_start_date, metro_date.seconds2iso8601(fLast_observation_date)) + \
+                   _("Removing the observation(s) after '%s' so the roadcast is computed ") % sRoadcast_start_date + \
+                   _("as if no later observation was available.")
+        metro_logger.print_message(metro_logger.LOGGER_MSG_WARNING, sMessage)
+
+        observation_data.del_matrix_row(range(nLastIndexToKeep + 1, len(npOT)))
 
     def __validate_observation_length(self, observation_data):
         """

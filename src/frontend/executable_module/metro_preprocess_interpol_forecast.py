@@ -104,8 +104,8 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         npFT = wf_original_data.get_matrix_col('FORECAST_TIME')
         nHourStart = int(metro_date.get_hour(npFT[0]))
         nbrHours = metro_date.get_elapsed_time(npFT[-1], npFT[0]) + 1
-        self.npTime = numpy.arange(0, nbrHours, dtype=numpy.float) * 3600
-        npTimeAtHours = numpy.arange(0, nbrHours, dtype=numpy.float) + nHourStart
+        self.npTime = numpy.arange(0, nbrHours, dtype=float) * 3600
+        npTimeAtHours = numpy.arange(0, nbrHours, dtype=float) + nHourStart
         wf_controlled_data.append_matrix_col('Hour', npTimeAtHours)
 
     def __interpolate_FT(self, wf_original_data, wf_controlled_data, wf_interpolated_data):
