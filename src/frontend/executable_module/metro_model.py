@@ -147,6 +147,8 @@ class Metro_model(Metro_module):
         npLayerType = cs_data.get_matrix_col('TYPE')
         lLayerType = npLayerType.astype(numpy.int32).tolist()
         lLayerThick = cs_data.get_matrix_col('THICKNESS').tolist()
+        lLayerCapacity = cs_data.get_matrix_col('CAPACITY').tolist()
+        lLayerConductivity = cs_data.get_matrix_col('CONDUCTIVITY').tolist()
         nNbrOfLayer = len(lLayerType)
 
         sMessage = _("Number of layer=") + str(nNbrOfLayer)
@@ -155,6 +157,8 @@ class Metro_model(Metro_module):
         # Append an empty box for the manuel mode
         lLayerType.append(0)
         lLayerThick.append(0.0)
+        lLayerCapacity.append(0.0)
+        lLayerConductivity.append(0.0)
 
         sMessage = _("roadlayer type=") + str(lLayerType)
         metro_logger.print_message(metro_logger.LOGGER_MSG_DEBUG, sMessage)
@@ -189,6 +193,8 @@ class Metro_model(Metro_module):
         lIR = wf_interpolated_data.get_matrix_col('IR').tolist()
         npFA = wf_interpolated_data.get_matrix_col('FA')
         lFA = npFA.tolist()
+        npTFZ = wf_interpolated_data.get_matrix_col('TFZ')
+        lTFZ = npTFZ.tolist()
         lPI = wf_interpolated_data.get_matrix_col('PI').astype(numpy.int32).tolist()
         lSC = wf_interpolated_data.get_matrix_col('SC').astype(numpy.int32).tolist()
 
@@ -249,7 +255,8 @@ class Metro_model(Metro_module):
 
         macadam.Do_Metro(bFlat, fLat, fLon, lLayerThick, nNbrOfLayer, lLayerType, lAT, lQP, lWS, lAP, lSF, lIR, lFA,
                          lPI, lSC, lAT_obs, lST_obs, lSST_obs, lAH, lTime_obs, lSWO, bNoObs, fDeltaTMetroObservation,
-                         nLenObservation, nNbrTimeSteps, bSilent, dSstDepth, bDeepTemp, dDeepTemp)
+                         nLenObservation, nNbrTimeSteps, bSilent, dSstDepth, bDeepTemp, dDeepTemp, lTFZ,
+                         lLayerCapacity, lLayerConductivity)
         bEchec = (macadam.get_echec())[0]
         # Check if the execution of the model was a success:
         if bEchec != 0:

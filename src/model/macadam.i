@@ -397,7 +397,8 @@ extern void Do_Metro(long, double, double, double*,\
 	 double*, double*, double*, double*,\
 	 long*, long*, double,\
 	 long, long, long, \
-	double, long, double);
+	double, long, double, double*,\
+	double*, double*);
 
 extern struct doubleStruct get_ra(void);
 extern struct doubleStruct get_sn(void);

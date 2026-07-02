@@ -100,7 +100,7 @@
 *     dpFA: Anthropogenic flux
 *     ALN: Snow Albedo 
 *     ALR: Road Albedo 
-*     FP: Frozing point (C)
+*     FP: Freezing point of water (C), one value per timestep
 *     FLAT: Road or bridge
 *     ITP: Road temperature profile (C, iref levels != 0)
 *     FSCORR: Coupling coefficient of solar flux
@@ -117,7 +117,7 @@
       DOUBLE PRECISION PR(DTMAX)
       DOUBLE PRECISION ITP(n)
       DOUBLE PRECISION FCOR
-      DOUBLE PRECISION ALN, ALR, FP      
+      DOUBLE PRECISION ALN, ALR, FP(DTMAX)
       DOUBLE PRECISION  FSCORR, FICORR
       DOUBLE PRECISION EPSILON, ZU, ZT, Z0, Z0T
       DOUBLE PRECISION dpSN(DTMAX), dpRA(DTMAX)
@@ -269,7 +269,7 @@
 *        black body radiation
          RA = EPSILON*STEFAN*TSK**4
 *        humidite at the suface
-         call SRFHUM  ( QG, CL, ER1, ER2, TSK, P0(i), QA(i), FP )
+         call SRFHUM  ( QG, CL, ER1, ER2, TSK, P0(i), QA(i), FP(i) )
 *        Air density at the surface
          DIV = RGASD * FOTVT ( TSK , QG )
          if (  abs(DIV) < 1.0D-5 ) then
@@ -280,7 +280,8 @@
          RHO = REAL(P0(i) / ( RGASD * FOTVT ( TSK , QG ) ))
 
 *        energy used/freed by the melting snow/freezing rain
-         call VERGLAS ( TYP(i), T(1,now), FP, FZ, PR(i), PR1, PR2, PRG )
+         call VERGLAS ( TYP(i), T(1,now), FP(i), FZ, PR(i), PR1, PR2,
+     *                  PRG )
 *        coefficients of heat flux
          call FLXSURFZ( CMU  , CTU , RIB  , FTEMP, FVAP ,
      *                  ILMO, UE   , FCOR , TA(i)+TCDK,
@@ -320,10 +321,10 @@
 
 *        Phase Transition when passing the melting point
 *        ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-         if ( T(1,next).lt.FP .and. T(1,now).ge.FP ) then
-*           Degel, G(0) positif 
+         if ( T(1,next).lt.FP(i) .and. T(1,now).ge.FP(i) ) then
+*           Degel, G(0) positif
             FGD = - (ER2 * CHLF)
-         else if( T(1,next).gt.FP .and. T(1,now).le.FP ) then
+         else if( T(1,next).gt.FP(i) .and. T(1,now).le.FP(i) ) then
 *           Gel, G(0) negatif
             FGD = ER1 * CHLF
          end if
@@ -349,7 +350,7 @@
 *        Accumulation balance at the surface
 *        ++++++++++++++++++++++++++++
 
-         call RODCON ( ER1, ER2, RHO  , CTU, CL , FP , FZ ,
+         call RODCON ( ER1, ER2, RHO  , CTU, CL , FP(i) , FZ ,
      *                 T(1,now), QA(i), QG , PR1, PR2, PRG, DX , 
      *                 npRC(i) )
 

@@ -90,7 +90,8 @@ static struct doubleStruct stLT; /* Level temperature */
 [I double* dpZones : Depth in meter of each layer of the road]
 [I long nNbrOfZone : Number of layers in the road]
 [I long* npMateriau : code indicating the composition of the road:
-   see https://framagit.org/metroprojects/metro/wikis/Layer_type_(METRo)]
+   see https://framagit.org/metroprojects/metro/wikis/Layer_type_(METRo)
+   (5 = custom, capacity/conductivity given in dpLayerCapacity/dpLayerConductivity)]
 [I double* dpTA : interpolated air temperature]
 [I double* dpQP : interpolated quantity of precipitation]
 [I double* dpFF : interpolated wind velocity] 
@@ -120,6 +121,9 @@ static struct doubleStruct stLT; /* Level temperature */
 [I double dSstDepth : SST sensor depth from station file]
 [I BOOL* bDeepTemp : is the bottom temperature layer given as input?]
 [I double* dDeepTemp : temperature of the bottom layer if bDeepTemp == TRUE]
+[I double* dpFP : freezing point of water (C), one value per timestep]
+[I double* dpLayerCapacity : capacity of each road layer of material type 5 (custom)]
+[I double* dpLayerConductivity : conductivity of each road layer of material type 5 (custom)]
 
 Returns: None 
  
@@ -153,7 +157,8 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
 	       double* dpRTO, double* dpDTO, double* dpAH, double* dpTimeO,\
 	       long* npSwo, BOOL* bpNoObs, double dDeltaT,\
 	       long nLenObservation, long nNbrTimeSteps, BOOL bSilent,\
-	       double dSstDepth, BOOL bDeepTemp, double dDeepTemp)
+	       double dSstDepth, BOOL bDeepTemp, double dDeepTemp, double* dpFP,\
+	       double* dpLayerCapacity, double* dpLayerConductivity)
 {
 
   /* Argument de la ligne de commande. Donne par python  */
@@ -194,7 +199,6 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
   double dFiCorr=0;
   double dEr1=0;
   double dEr2=0;
-  double dFp=0.0;
   /* Grid values */
   long nIR40;
   double* dpCnt;
@@ -240,7 +244,8 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
 
   f77name(grille)(&(stTemperatureDepth.nSize), &nIR40, &bFlat, &nNbrOfZone, \
 		  dpZones, npMateriau, &dDiff, stTemperatureDepth.pdArray, \
-		  stEc.plArray, dpCapacity, dpConductivity, &dSstDepth); 
+		  stEc.plArray, dpCapacity, dpConductivity, &dSstDepth, \
+		  dpLayerCapacity, dpLayerConductivity);
   if(*(stEc.plArray)){
     goto liberation;
   }
@@ -287,7 +292,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
     f77name(coupla)(dpFS, dpFI, dpPS, dpTA, dpAH, dpFF, npTYP, dpQP, npRC, \
 		    &stTemperatureDepth.nSize, &nNtp, &nNtp2, dpItp, \
 		    &(dpRTO[nLenObservation]), &bFlat, &dFCorr,   \
-		    &dAln, &dAlr, &dFp, &dFsCorr, &dFiCorr, &dEr1, &dEr2, \
+		    &dAln, &dAlr, dpFP, &dFsCorr, &dFiCorr, &dEr1, &dEr2, \
 		    &bFail, &dEpsilon, &dZ0, &dZ0t, &dZu, &dZt, stEc.plArray, \
 		    stRA.pdArray, stSN.pdArray, stRC.plArray, stRT.pdArray,\
 		    stIR.pdArray, stSF.pdArray, stFV.pdArray, stFC.pdArray, \
@@ -326,7 +331,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
     f77name(coupla)(dpFS, dpFI, dpPS, dpTA, dpAH, dpFF, npTYP, dpQP, \
 		    npRC, &stTemperatureDepth.nSize, &nNtp, &nNtp2, dpItp,\
 		    &(dpRTO[nLenObservation]), &bFlat, &dFCorr, \
-		    &dAln, &dAlr, &dFp, &dFsCorr, &dFiCorr, &dEr1, &dEr2,\
+		    &dAln, &dAlr, dpFP, &dFsCorr, &dFiCorr, &dEr1, &dEr2,\
 		    &bFail, &dEpsilon, &dZ0, &dZ0t, &dZu, &dZt, stEc.plArray,\
 		    stRA.pdArray, stSN.pdArray, stRC.plArray, stRT.pdArray,\
 		    stIR.pdArray, stSF.pdArray, stFV.pdArray, stFC.pdArray,\
@@ -351,7 +356,7 @@ void Do_Metro( BOOL bFlat, double dMLat, double dMLon, double* dpZones,\
   f77name(balanc)(dpFS, dpFI, dpPS, dpTA, dpAH, dpFF, npTYP, dpQP,\
 		  &stTemperatureDepth.nSize,					\
 		  &nIR40, &nNtp2, &nNbrTimeSteps, dpItp, &bFlat, &dFCorr,\
-		   &dAln, &dAlr, &dFp, &dFsCorr, &dFiCorr, &dEr1,\
+		   &dAln, &dAlr, dpFP, &dFsCorr, &dFiCorr, &dEr1,\
 		  &dEr2, &dEpsilon, &dZ0, &dZ0t, &dZu, &dZt, stEc.plArray,\
 		  stRT.pdArray, stRA.pdArray ,stSN.pdArray, stRC.plArray,\
 		  stIR.pdArray, stSF.pdArray, stFV.pdArray, stFC.pdArray,\

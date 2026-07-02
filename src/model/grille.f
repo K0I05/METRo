@@ -48,7 +48,7 @@
 ***
       SUBROUTINE GRILLE (iref, ir40, FLAT, NZONE, ZONES,
      *     MAT, DIFF, dpTemperatureDepth, ECHEC, dpCapacity,
-     *     dpConductivity, dSstDepth)
+     *     dpConductivity, dSstDepth, USERCS, USERKS)
       IMPLICIT NONE
       INTEGER i, j, k
       INTEGER Nl, n
@@ -67,10 +67,13 @@
 *     MAT: Materiel type of each zone
 *     NZONE: number of zones
 *     ZONES: limites in differents zones
+*     USERCS: user-supplied capacity for zones of material type 5 (custom)
+*     USERKS: user-supplied conductivity for zones of material type 5 (custom)
 ***
       LOGICAL FLAT, ECHEC
       INTEGER NZONE, MAT(20)
       DOUBLE PRECISION ZONES(20), CS(20), KS(20)
+      DOUBLE PRECISION USERCS(20), USERKS(20)
 ***
 *     Output
 *     -------
@@ -144,6 +147,11 @@
 *           ------------------------------------
             CS(k) = 2.0e6
             KS(k) = 1.0
+         ELSE IF ( MAT(k) .eq. 5 ) THEN
+*           custom material, capacity/conductivity given by the user
+*           --------------------------------------------------------
+            CS(k) = USERCS(k)
+            KS(k) = USERKS(k)
          ELSE
             ECHEC = .true.
             return

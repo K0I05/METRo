@@ -42,8 +42,10 @@
 
 
 from executable_module.metro_preprocess import Metro_preprocess
+import metro_config
 import metro_logger
 import metro_error
+import numpy
 from toolbox import metro_util
 
 
@@ -58,10 +60,70 @@ class Metro_preprocess_qa_qc_station(Metro_preprocess):
         try:
             Metro_preprocess.start(self)
             pStation = self.get_infdata_reference('STATION')
+            self.__check_custom_roadlayer(pStation)
             if self.infdata_exist('HORIZON'):
                 self.__check_sunshadow(pStation)
         except metro_error.Metro_data_error as inst:
             metro_logger.print_message(metro_logger.LOGGER_MSG_STOP, str(inst))
+
+    # Capacity (J/m3/K) and conductivity (W/m/K) bounds for 'CUSTOM' road layers.
+    # METRo's finite-difference ground grid (grille.f) is a fixed-size, unbounded-checked
+    # array (nNGRILLEMAX) tuned for the 4 built-in materials (capacity ~2.0-2.1e6,
+    # conductivity ~0.8-2.2). Values far outside that range make the grid numerically
+    # unstable and crash the compiled physics core (segfault) instead of failing
+    # gracefully. These bounds were determined empirically and comfortably contain the
+    # built-in materials while allowing genuinely different ones (e.g. wood, brick).
+    fCUSTOM_CAPACITY_MIN = 1.0e6
+    fCUSTOM_CAPACITY_MAX = 1.0e7
+    fCUSTOM_CONDUCTIVITY_MIN = 0.05
+    fCUSTOM_CONDUCTIVITY_MAX = 3.5
+
+    def __check_custom_roadlayer(self, pStation):
+        """
+            Description: A road layer of type 'CUSTOM' must have a valid
+                         <capacity> and <conductivity> given in the station
+                         configuration file, within a range that keeps METRo's
+                         ground grid numerically stable (see the class-level
+                         fCUSTOM_* bounds above for why).
+                         See https://framagit.org/metroprojects/metro/wikis/Layer_type_(METRo)
+        """
+        cs_data = pStation.get_data()
+        nCustom_type = metro_config.get_value('ROADLAYER_TYPE_CUSTOM')
+        npType = cs_data.get_matrix_col('TYPE')
+        npCapacity = cs_data.get_matrix_col('CAPACITY')
+        npConductivity = cs_data.get_matrix_col('CONDUCTIVITY')
+
+        for i in range(len(npType)):
+            if npType[i] == nCustom_type:
+                bMissing_capacity = numpy.isnan(npCapacity[i]) or npCapacity[i] <= 0
+                bMissing_conductivity = numpy.isnan(npConductivity[i]) or npConductivity[i] <= 0
+                if bMissing_capacity or bMissing_conductivity:
+                    sMessage = _("Road layer #%d is of type 'CUSTOM' but is missing a valid ") % (i + 1) + \
+                               _("(positive) <capacity> and/or <conductivity> value in the ") + \
+                               _("station configuration file.")
+                    metro_logger.print_message(metro_logger.LOGGER_MSG_STOP, sMessage)
+                elif not (self.fCUSTOM_CAPACITY_MIN <= npCapacity[i] <= self.fCUSTOM_CAPACITY_MAX):
+                    sMessage = _("Road layer #%d has a <capacity> of %s J/m3/K, outside the ") % \
+                               (i + 1, str(npCapacity[i])) + \
+                               _("supported range [%s, %s]. Values outside this range make ") % \
+                               (str(self.fCUSTOM_CAPACITY_MIN), str(self.fCUSTOM_CAPACITY_MAX)) + \
+                               _("METRo's ground grid numerically unstable.")
+                    metro_logger.print_message(metro_logger.LOGGER_MSG_STOP, sMessage)
+                elif not (self.fCUSTOM_CONDUCTIVITY_MIN <= npConductivity[i] <= self.fCUSTOM_CONDUCTIVITY_MAX):
+                    sMessage = _("Road layer #%d has a <conductivity> of %s W/m/K, outside the ") % \
+                               (i + 1, str(npConductivity[i])) + \
+                               _("supported range [%s, %s]. Values outside this range make ") % \
+                               (str(self.fCUSTOM_CONDUCTIVITY_MIN), str(self.fCUSTOM_CONDUCTIVITY_MAX)) + \
+                               _("METRo's ground grid numerically unstable.")
+                    metro_logger.print_message(metro_logger.LOGGER_MSG_STOP, sMessage)
+
+        # Layers that are not 'CUSTOM' don't use these values; replace any
+        # missing (NaN) value with 0.0 so downstream code only deals with floats.
+        npCapacity = numpy.nan_to_num(npCapacity, nan=0.0)
+        npConductivity = numpy.nan_to_num(npConductivity, nan=0.0)
+        cs_data.set_matrix_col('CAPACITY', npCapacity)
+        cs_data.set_matrix_col('CONDUCTIVITY', npConductivity)
+        pStation.set_data(cs_data)
 
     def __check_sunshadow(self, station_data):
         """

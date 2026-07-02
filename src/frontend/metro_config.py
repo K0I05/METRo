@@ -81,6 +81,7 @@ CFG_LONG_OPTIONS = ["help", "version",
                     "selftest", "silent", "roadcast-start-date=", "lang=",
                     "use-solarflux-forecast", "use-infrared-forecast",
                     "use-anthropogenic-flux",
+                    "use-freezing-point-forecast",
                     "use-sst-sensor-depth",
                     "enable-sunshadow",
                     "sunshadow-method=",
@@ -337,6 +338,15 @@ def save_command_line_parameter(lArgv, sShort_opt, lLong_opt):
                        'DATA_TYPE': "REAL"}
 
             dConfig['XML_FORECAST_PREDICTION_EXTENDED_ITEMS']['VALUE'].append(dFADict)
+
+        if o == "--use-freezing-point-forecast":
+            dConfig['TFZ']['VALUE'] = True
+
+            dTFZDict = {'NAME': "TFZ",
+                        'XML_TAG': "tfz",
+                        'DATA_TYPE': "REAL"}
+
+            dConfig['XML_FORECAST_PREDICTION_EXTENDED_ITEMS']['VALUE'].append(dTFZDict)
 
         if o == "--use-sst-sensor-depth":
             dConfig['SST_DEPTH']['VALUE'] = True
@@ -767,17 +777,28 @@ def set_default_value():
                                                        'FROM': CFG_INTERNAL,
                                                        'COMMENTS': _("standard road layer items")}
 
-    dConfig['XML_STATION_ROADLAYER_EXTENDED_ITEMS'] = {'VALUE': [],
+    dConfig['XML_STATION_ROADLAYER_EXTENDED_ITEMS'] = {'VALUE': [{'NAME': "CAPACITY",
+                                                                  'XML_TAG': "capacity",
+                                                                  'DATA_TYPE': "REAL"},
+
+                                                                 {'NAME': "CONDUCTIVITY",
+                                                                  'XML_TAG': "conductivity",
+                                                                  'DATA_TYPE': "REAL"}],
                                                        'FROM': CFG_INTERNAL,
                                                        'COMMENTS': _("extended road layer items")}
 
     dConfig['XML_STATION_ROADLAYER_VALID_TYPE'] = {'VALUE': {'ASPHALT': 1, 'ASPHALTE': 1,
                                                              'CRUSHED ROCK': 2, 'GRAVIER': 2,
                                                              'CEMENT': 3, 'BETON': 3,
-                                                             'SAND': 4, 'SABLE': 4},
+                                                             'SAND': 4, 'SABLE': 4,
+                                                             'CUSTOM': 5, 'PERSONNALISE': 5},
 
                                                    'FROM': CFG_INTERNAL,
                                                    'COMMENTS': _("valid station layer type")}
+
+    dConfig['ROADLAYER_TYPE_CUSTOM'] = {'VALUE': 5,
+                                        'FROM': CFG_INTERNAL,
+                                        'COMMENTS': _("road layer type code requiring capacity/conductivity")}
 
     # -----------------------------------  Roadcast ----------------------------
     dConfig['XML_ROADCAST_XPATH_ROOT'] = {'VALUE': "roadcast",
@@ -1053,6 +1074,10 @@ def set_default_value():
     dConfig['FA'] = {'VALUE': False,
                      'FROM': CFG_HARDCODED,
                      'COMMENTS': _("Use anthropogenic flux value from forecast")}
+
+    dConfig['TFZ'] = {'VALUE': False,
+                      'FROM': CFG_HARDCODED,
+                      'COMMENTS': _("Use freezing point of water value from forecast")}
 
     dConfig['TL'] = {'VALUE': False,
                      'FROM': CFG_HARDCODED,

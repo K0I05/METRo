@@ -75,6 +75,7 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
         self.__interpolate_PI(forecast_data.get_original_data(), forecast_data.get_interpolated_data())
         self.__interpolate_CC(forecast_data.get_original_data(), forecast_data.get_interpolated_data())
         self.__interpolate_FA(forecast_data.get_original_data(), forecast_data.get_interpolated_data())
+        self.__interpolate_TFZ(forecast_data.get_original_data(), forecast_data.get_interpolated_data())
         pForecast.set_data_collection(forecast_data)
 
     def __set_attribute(self, wf_original_data, wf_controlled_data):
@@ -413,3 +414,30 @@ class Metro_preprocess_interpol_forecast(Metro_preprocess):
             npFA.fill(10)
         npFA = metro_util.interpolate(self.npTime, npFA)
         wf_interpolated_data.append_matrix_col('FA', npFA)
+
+    # Freezing point of water
+    def __interpolate_TFZ(self, wf_originpl_data, wf_interpolated_data):
+        """
+            Name: __interpolate_TFZ
+
+            Parameters: [I] metro_data wf_originpl_data : originpl data.  Read-only
+                        [I] metro_data wf_processed_data : container of the interpolated data.
+
+            Returns: None
+
+            Functions Called: metro_util.interpolate,
+                              metro_data.get_matrix_col
+                              metro_data.append_matrix_col
+
+            Description: Does the interpolation of the freezing point of water (C).
+                         See https://framagit.org/metroprojects/metro/-/wikis/Roadmap_(METRo)
+        """
+
+        if metro_config.get_value('TFZ'):
+            npTFZ = wf_originpl_data.get_matrix_col('TFZ')
+        # If freezing point is not specified, TFZ is set to the freezing point of pure water (0 C)
+        else:
+            npTFZ = numpy.empty(self.npTime.size)
+            npTFZ.fill(0.0)
+        npTFZ = metro_util.interpolate(self.npTime, npTFZ)
+        wf_interpolated_data.append_matrix_col('TFZ', npTFZ)

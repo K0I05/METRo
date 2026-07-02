@@ -106,7 +106,7 @@ echo ""
 if [ -d $destination_path ]; then
     echo "Warning target directory: $destination_path already exist."
     echo "Installing a different version of METRo over an existing one"
-    echo "is not recommanded."
+    echo "is not recommended."
     echo "Do you want to continue? [y|n]"
     read answer
     if [ ! "$answer" = y ]; then

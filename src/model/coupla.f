@@ -99,7 +99,7 @@
 *     dpFP: Phase change energy
 *     ALN: Snow Albedo 
 *     ALR: Road Albedo 
-*     FP: Frozing point (C)
+*     FP: Freezing point of water (C), one value per timestep
 *     FLAT: Road or bridge
 *     dpCapacity: Thermic capacity of the road at every level
 *     dpConductivity: Thermic conductivity of the road at every level
@@ -110,7 +110,7 @@
       DOUBLE PRECISION QA(DTMAX), PR(DTMAX)
       DOUBLE PRECISION VA(DTMAX), P0(DTMAX)
       DOUBLE PRECISION FCOR
-      DOUBLE PRECISION ALN, ALR, TSO, FP
+      DOUBLE PRECISION ALN, ALR, TSO, FP(DTMAX)
       DOUBLE PRECISION EPSILON, ZU, ZT, Z0, Z0T
       DOUBLE PRECISION dpSN(DTMAX), dpRA(DTMAX)
       DOUBLE PRECISION dpIR(DTMAX), dpSF(DTMAX)
@@ -276,7 +276,7 @@
 *        Black body radiation 
          RA = EPSILON*STEFAN*TSK**4
 *        Humidity at the surface
-         call SRFHUM  ( QG, CL, ER1, ER2, TSK, P0(i), QA(i), FP )
+         call SRFHUM  ( QG, CL, ER1, ER2, TSK, P0(i), QA(i), FP(i) )
 *        Air density at ground
          DIV = RGASD * FOTVT ( TSK , QG )
          if (  abs(DIV) < 1.0D-5 ) then
@@ -286,7 +286,7 @@
          end if
          RHO = REAL(P0(i) / ( RGASD * FOTVT ( TSK , QG ) ))
 *        Energy used/free by the melting snow/freezing rain
-         call VERGLAS ( TYP(i), T(1,now), FP, FZ, PR(i),
+         call VERGLAS ( TYP(i), T(1,now), FP(i), FZ, PR(i),
      *                  PR1, PR2, PRG, FAIL )
 *        Heat flux coefficients
          call FLXSURFZ( CMU  , CTU , RIB  , FTEMP, FVAP ,
@@ -321,7 +321,7 @@
      *        dpCapacity, dpConductivity)
 *        Balance of accumulation at the ground
 *        ++++++++++++++++++++++++++++++
-         call RODCON ( ER1, ER2, RHO  , CTU, CL , FP , FZ , 
+         call RODCON ( ER1, ER2, RHO  , CTU, CL , FP(i) , FZ ,
      *                 T(1,now), QA(i), QG , PR1, PR2, PRG, DX , 
      *                 npRC(i))
 

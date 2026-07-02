@@ -43,7 +43,8 @@ void Do_Metro(BOOL bFlat, double dMLat, double dMLon, double* dpZones, \
 	      double* dpRTO, double* dpDTO, double* dpAH, double* dpTimeO,\
 	      long* npSWO,  BOOL* bpNoObs, double dDeltaT, \
 	      long nLenObservation, long nNbrTimeSteps, BOOL bSilent,\
-	      double dSstDepth, BOOL bDeepTemp, double dDeepTemp);
+	      double dSstDepth, BOOL bDeepTemp, double dDeepTemp, double* dpFP,\
+	      double* dpLayerCapacity, double* dpLayerConductivity);
 	      
 void init_structure(long nTimeStepMax, long nGrilleLevelMax);
 
@@ -53,7 +54,8 @@ void init_structure(long nTimeStepMax, long nGrilleLevelMax);
 extern void setconstphys_(BOOL* bSilent);
 extern void grille_(long* nSize, long* nIR40, BOOL* bFlat, long* nNbrOfZone,\
 		    double* dpZones, long* npMateriau, double* dDiff, double* pdArray, \
-		    long* plArray, double* dpCapacity, double* dpConductivity, double* dSstDepth);
+		    long* plArray, double* dpCapacity, double* dpConductivity, double* dSstDepth,\
+		    double* dpUserCS, double* dpUserKS);
 extern void makitp_(double* dpItp, long* nSize, long* nIR40, BOOL* bFlat, double* dpTimeO, \
 		    double* dpRTO, double* dpDTO, double* dpTAO, double* dDiff, \
 		    double* dMLon, long* npSwo, double* pdArray, BOOL* bDeepTemp, double* dDeepTemp);
