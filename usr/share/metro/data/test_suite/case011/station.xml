@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <version>1.0</version>
+    <road-station>LGC00</road-station>
+    <time-zone>AST4ADT</time-zone>
+    <production-date>2005-08-11T11:00Z</production-date>
+    <coordinate>
+      <latitude>45.51</latitude>
+      <longitude>-66.56</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+    <nbrPuck>3</nbrPuck>
+    <puckForForecast>1</puckForForecast>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.15</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>2</position>
+      <type>gravier</type>
+      <thickness>0.6</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station>

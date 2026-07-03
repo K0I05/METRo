@@ -34,10 +34,10 @@
 
 progname=`basename $0`
 
-METRO_VERSION=3.3.2
+METRO_VERSION=4.0.0
 
 
-if [[ $1 = clean ]]; then    
+if [[ $1 = clean ]]; then
     echo "* Cleaning last METRo model build attempt if necessary..."
     rm -f _macadam.so *.o macadam.py macadam_wrap.c
     exit 0
@@ -62,22 +62,30 @@ if [ -n "$PYTHON_INCLUDE" ] ; then
         exit 1
     fi
     PYTHON_INC=-I$PYTHON_INCLUDE
+elif which python3-config >/dev/null; then
+    echo "Using python3-config to detect python settings."
+    echo -n "You can override detected values by setting "
+    echo "enviroment variable PYTHON_INCLUDE."
+    echo "Ex: export PYTHON_INCLUDE=\"/usr/local/include/python3.6\""
+    PYTHON_INC=`python3-config --includes`
 else
     echo "----------------------------------------------------------"
     echo "WARNING!"
     echo "No python path defined."
-    echo "Will try to used the default path for python 2.4"
+    echo "Will try to used the default path for python 3.6"
     echo "If it still doesn't work,"
     echo "please set environment variable PYTHON_INCLUDE to your"
     echo "python include directory."
-    echo "Ex: export PYTHON_INCLUDE=\"/usr/local/include/python2.4\""
+    echo "Ex: export PYTHON_INCLUDE=\"/usr/local/include/python3.6\""
     echo "----------------------------------------------------------"
     echo ""
-    PYTHON_INC="-I/usr/include/python2.4/"
+    PYTHON_INC="-I/usr/include/python3.6/"
 fi
+echo ""
+echo "Compiling..."
 echo "    Python include path = "$PYTHON_INC
 
-PLATFORM=`python -c "import platform;print platform.architecture()[0]"`
+PLATFORM=`python3 -c "import platform;print(platform.architecture()[0])"`
 if  [ $PLATFORM = "64bit" ]; then
     FORTRAN_DEFAULT_INTEGER="-fdefault-integer-8"
     echo "    64 bit architecture detected"
@@ -87,7 +95,7 @@ fi
 
 echo "    Using SWIG"
 echo '    macadam.i :'
-swig -python  macadam.i 
+swig -python macadam.i
 
 echo "    C compilation"
 gcc -c -fPIC -Wall  -Wno-implicit  macadam.c $PYTHON_INC
@@ -110,7 +118,7 @@ if [ -z $FC ]; then
 fi
 
 echo "    Fortran compilation"
-$FC -Wall -Wsurprising -W -c -fPIC  $FORTRAN_DEFAULT_INTEGER lib_gen.f grille.f array2matrix.f initial.f coupla.f lib_therm.f flxsurfz.f balanc.f constPhys.f 
+$FC -Wall -Wsurprising -W -c -fPIC  $FORTRAN_DEFAULT_INTEGER lib_gen.f grille.f array2matrix.f initial.f coupla.f lib_therm.f flxsurfz.f balanc.f constPhys.f
 
 
 echo "    Link"
@@ -119,14 +127,7 @@ $FC -shared macadam.o macadam_wrap.o  lib_gen.o  grille.o array2matrix.o initial
 
 echo "    Copying .so in usr/share/metro/model"
 if [ ! -d $destination_path/usr/share/metro/model ]; then
-    mkdir $destination_path/usr/share/metro/model
+    mkdir -p $destination_path/usr/share/metro/model
 fi
 cp macadam.py $destination_path/usr/share/metro/model/
-
-if [ ! -d $destination_path/usr/lib/metro ]; then
-    mkdir -p $destination_path/usr/lib/metro
-fi
-cp _macadam.so $destination_path/usr/lib/metro/
-
-
-#cp -v _macadam.so  macadam.py ../frontend/model/
+cp _macadam.so $destination_path/usr/share/metro/model/

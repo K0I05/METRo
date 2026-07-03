@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<observation>
+  <header>
+    <filetype>rwis-observation</filetype>
+    <version>1.0</version>
+    <road-station>300008</road-station>
+  </header>
+  <measure-list>
+    <measure>
+      <test-time>2005-10-18 08:34:47.000</test-time>
+      <observation-time>2005-10-18T08:40Z</observation-time>
+      <at>5.84</at>
+      <td>3.13</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>3.1</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 08:54:40.000</test-time>
+      <observation-time>2005-10-18T09:00Z</observation-time>
+      <at>5.84</at>
+      <td>3.13</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>-1.41</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 09:17:33.000</test-time>
+      <observation-time>2005-10-18T09:20Z</observation-time>
+      <at>5.84</at>
+      <td>3.13</td>
+      <pi>1</pi>
+      <ws>10</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>-0.3</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 09:34:07.000</test-time>
+      <observation-time>2005-10-18T09:40Z</observation-time>
+      <at>5.75</at>
+      <td>3.05</td>
+      <pi>1</pi>
+      <ws>6</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>-4.4</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 09:54:06.000</test-time>
+      <observation-time>2005-10-18T10:00Z</observation-time>
+      <at>5.67</at>
+      <td>2.97</td>
+      <pi>1</pi>
+      <ws>9</ws>
+      <sc>33</sc>
+      <st>9.42</st>
+      <sst>-1.32</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 10:13:59.000</test-time>
+      <observation-time>2005-10-18T10:20Z</observation-time>
+      <at>5.67</at>
+      <td>2.97</td>
+      <pi>1</pi>
+      <ws>7</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>0.29</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 10:34:07.000</test-time>
+      <observation-time>2005-10-18T10:40Z</observation-time>
+      <at>5.67</at>
+      <td>2.79</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>0.12</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 10:53:16.000</test-time>
+      <observation-time>2005-10-18T11:00Z</observation-time>
+      <at>5.58</at>
+      <td>2.71</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc>33</sc>
+      <st>9.42</st>
+      <sst>2.17</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 11:13:15.000</test-time>
+      <observation-time>2005-10-18T11:20Z</observation-time>
+      <at>5.58</at>
+      <td>2.53</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc>33</sc>
+      <st>9.51</st>
+      <sst>0.63</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 11:33:23.000</test-time>
+      <observation-time>2005-10-18T11:40Z</observation-time>
+      <at>5.49</at>
+      <td>2.27</td>
+      <pi>0</pi>
+      <ws>13</ws>
+      <sc>33</sc>
+      <st>9.59</st>
+      <sst>7.03</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 11:52:29.000</test-time>
+      <observation-time>2005-10-18T12:00Z</observation-time>
+      <at>5.73</at>
+      <td>2.5</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc>33</sc>
+      <st>9.93</st>
+      <sst>2.59</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 14:00:59.000</test-time>
+      <observation-time>2005-10-18T14:00Z</observation-time>
+      <at>7.88</at>
+      <td>1.63</td>
+      <pi>0</pi>
+      <ws>6</ws>
+      <sc>33</sc>
+      <st>15.82</st>
+      <sst>3.36</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 14:20:52.000</test-time>
+      <observation-time>2005-10-18T14:20Z</observation-time>
+      <at>7.56</at>
+      <td>1.11</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc>33</sc>
+      <st>15.99</st>
+      <sst>1.82</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 14:30:49.000</test-time>
+      <observation-time>2005-10-18T14:40Z</observation-time>
+      <at>7.8</at>
+      <td>1.33</td>
+      <pi>0</pi>
+      <ws>11</ws>
+      <sc>33</sc>
+      <st>15.99</st>
+      <sst>5.24</sst>
+    </measure>
+    <measure>
+      <test-time>2005-10-18 14:51:04.000</test-time>
+      <observation-time>2005-10-18T15:00Z</observation-time>
+      <at>8.4</at>
+      <td>1.45</td>
+      <pi>0</pi>
+      <ws>14</ws>
+      <sc>33</sc>
+      <st>17.1</st>
+      <sst>5.67</sst>
+    </measure>
+  </measure-list>
+</observation>

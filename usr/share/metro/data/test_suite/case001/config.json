@@ -1,0 +1,5 @@
+{
+  "description": "This is the description message.",
+  "addition_to_command_line": null,
+  "expected_running_result": "FAILURE"
+}

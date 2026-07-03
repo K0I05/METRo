@@ -27,5 +27,5 @@ https://framagit.org/metroprojects/metro/wikis/home
 
 ## Contact us 
 
-You can join the METRo developer team at the address: 
+You can contact the METRo developer team [through the METRo users mailing list](https://framalistes.org/sympa/info/metro-users) at the address: 
 [metro-users@framalistes.org](mailto:metro-users@framalistes.org)

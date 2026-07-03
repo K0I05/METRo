@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <version>1.0</version>
+    <production-date>2009-08-18T12:00Z</production-date>
+    <time-zone>UTC+1</time-zone>
+    <id>3</id>
+    <name>Jeprca</name>
+    <station-type>road</station-type>
+    <coordinate>
+      <latitude>46.1846</latitude>
+      <longitude>14.3789</longitude>
+    </coordinate>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.14</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>2</position>
+      <type>sand</type>
+      <thickness>0.30</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>3</position>
+      <type>crushed rock</type>
+      <thickness>0.50</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station>

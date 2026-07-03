@@ -1,22 +1,19 @@
 #!/usr/bin/env python
-# -*- coding: iso-8859-15 -*-
 #
 # METRo : Model of the Environment and Temperature of Roads
 # METRo is Free and is proudly provided by the Government of Canada
-# Copyright (C) Her Majesty The Queen in Right of Canada, Environment Canada, 2006 
-
+# Copyright (C) Her Majesty The Queen in Right of Canada, Environment Canada, 2006
+#
 #  Questions or bugs report: metro@ec.gc.ca
 #  METRo repository: https://framagit.org/metroprojects/metro
 #  Documentation: https://framagit.org/metroprojects/metro/wikis/home
-#
 #
 # Code contributed by:
 #  Francois Fortin - Canadian meteorological center
 #
 #  $LastChangedDate$
 #  $LastChangedRevision$
-#
-########################################################################
+###################################################################################
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
 #  the Free Software Foundation; either version 2 of the License, or
@@ -31,20 +28,20 @@
 #  along with this program; if not, write to the Free Software
 #  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#
-#
-
-
-#
-# Every file in the source directories is listed separatly so that we don't 
-# include unwanted files.  This way, we are forced to consider what goes in the 
-# package and what doesn't each time we make modifications. We don't blindly 
+# Every file in the source directories is listed separately so that we don't
+# include unwanted files.  This way, we are forced to consider what goes in the
+# package and what doesn't each time we make modifications. We don't blindly
 # add a directory with all the temporary and test files and it helps us to keep
 # clean the distribution package.
-#
+
+
+import sys
+import os
+import re
+
 
 sPackage_list = \
-              """
+    """
 src/frontend/metro.py
 src/frontend/metro_config.py
 src/frontend/metro_logger.py
@@ -144,42 +141,30 @@ README
 LICENSE
 INSTALL
 setup.sh
-
-"""
-
-
-
-
-import string
-import sys
-import os
-import re
-import shutil
+    """
 
 VERSION_FILE = "../src/frontend/metro_config.py"
 LINE_REGEX = 'CFG_METRO_VERSION\s*\=\s*[\"|\'][0-9]\.[0-9]\.[0-9][\"|\']'
 VERSION_REGEX = '[0-9]\.[0-9]\.[0-9]'
+
 
 def chomp(x):
     while x != "" and x[-1] in "\r\n":
         x = x[:-1]
     return x
 
-def extract_version_number( sFilename ):
 
+def extract_version_number(sFilename):
     sVersion_number = None
-    
+
     file = open(sFilename)
     text = file.read()
     file.close()
-    
-    match_version_line =\
-        re.compile(LINE_REGEX)
-    
+
+    match_version_line = re.compile(LINE_REGEX)
     match_version_number = re.compile(VERSION_REGEX)
-    
     match_obj_version_line = match_version_line.search(text)
-    
+
     if match_obj_version_line:
         start, stop = match_obj_version_line.span(0)
         sVersion_line = text[start:stop]
@@ -188,72 +173,62 @@ def extract_version_number( sFilename ):
             start, stop = match_obj_version_number.span(0)
             sVersion_number = sVersion_line[start:stop]
     else:
-        print "Could not find the line containing the version number.\n" +\
-        "The regex is: '%s'." % LINE_REGEX
+        print("Could not find the line containing the version number.\n" + "The regex is: '%s'." % LINE_REGEX)
     return sVersion_number
 
 
 sVersion_number = extract_version_number(VERSION_FILE)
 
 if not sVersion_number:
-    print "Could not find version number in file:'%s'. Aborting" % VERSION_FILE
+    print("Could not find version number in file:'%s'. Aborting" % VERSION_FILE)
     sys.exit(1)
 
 sMetro_dir = "metro-" + sVersion_number
 
 # get path of metro parent directory
 
-lPath = string.split(sys.path[0],"/")
+lPath = sys.path[0].split("/")
 sSvn_root_dir = lPath[-2]
-sRoot_path = string.join(lPath[:-2],"/")
-sMetro_real_dir = string.join(lPath[:-1],"/")
-sPackage_path = string.join(lPath[:-2],"/")
+sRoot_path = "/".join(lPath[:-2])
+sMetro_real_dir = "/".join(lPath[:-1])
+sPackage_path = "/".join(lPath[:-2])
 
 # add leading metro directory name to each filename
-sPackage_list = string.replace(sPackage_list,"\n","\n" + sSvn_root_dir + "/")
+sPackage_list = sPackage_list.replace("\n", "\n" + sSvn_root_dir + "/")
 
 # replace \n by a space character
-sPackage_list = string.replace(sPackage_list,"\n"," ")
+sPackage_list = sPackage_list.replace("\n", " ")
 
 # remove any single sMetro_dir entry
 sPackage_list = sPackage_list + " "
 
 # do it 2 time (dirty hack)
-sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
-sPackage_list = string.replace(sPackage_list," " + sSvn_root_dir + "/ "," ")
+sPackage_list = sPackage_list.replace(" " + sSvn_root_dir + "/ ", " ")
+sPackage_list = sPackage_list.replace(" " + sSvn_root_dir + "/ ", " ")
 
-# copy model binary to lib
-#shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/usr/lib/metro/_macadam.so",
-#              sRoot_path + "/" + sSvn_root_dir + "/src/model/_macadam.so.prebuilt")
-#shutil.copy2( sRoot_path + "/" + sSvn_root_dir + "/usr/share/metro/model/macadam.py",
-#              sRoot_path + "/" + sSvn_root_dir + "/src/model/macadam.py.prebuilt")
+# tar command
+sTarCommand = "tar cjvf " + sPackage_path + "/metro-" + sVersion_number + \
+              ".tar.bz2 --exclude .svn --transform 's,^%s/,%s/,' " % (sSvn_root_dir, sMetro_dir) + " -C " + \
+              sRoot_path + " " + sPackage_list
 
-
-#tar command
-sTarCommand = "tar cjvf " +  sPackage_path + "/metro-" + sVersion_number + \
-           ".tar.bz2 --exclude .svn --transform 's,^%s/,%s/,' " % (sSvn_root_dir,sMetro_dir) + " -C " + \
-           sRoot_path + " " + sPackage_list
-
-#execute tar command
-print 'Executing', sTarCommand
+# execute tar command
+print('Executing', sTarCommand)
 os.system(sTarCommand)
 
-#sign command
+# sign command
 sSignCommand = "gpg --detach-sign " + sPackage_path + "/metro-" + sVersion_number + ".tar.bz2"
 
-#sign package
-print "\nMake a detached signature: '" + sSignCommand + "'"
+# sign package
+print("\nMake a detached signature: '" + sSignCommand + "'")
 os.system(sSignCommand)
 
-
 # cleanup
-print "\n* Cleanup *"
-
-print ""
-print 
-print "* Package Creation Done *\n"
-print "The METRo Package is located here:"
-print "'" + sPackage_path + "/metro-" + sVersion_number + ".tar.bz2" + "'"
-print ""
-print "The METRo Package signature is located here:"
-print "'" + sPackage_path + "/metro-" + sVersion_number + ".tar.bz2.sig" + "'"
+print("\n* Cleanup *")
+print("")
+print()
+print("* Package Creation Done *\n")
+print("The METRo Package is located here:")
+print("'" + sPackage_path + "/metro-" + sVersion_number + ".tar.bz2" + "'")
+print("")
+print("The METRo Package signature is located here:")
+print("'" + sPackage_path + "/metro-" + sVersion_number + ".tar.bz2.sig" + "'")

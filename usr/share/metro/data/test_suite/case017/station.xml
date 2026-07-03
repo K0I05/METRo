@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+    <header>
+        <version>1.0</version>
+        <road-station>RONOAJ</road-station>
+        <time-zone>EST5EDT5</time-zone>
+        <production-date>2005-01-12T09:00Z</production-date>
+        <coordinate>
+            <latitude>44.12774</latitude>
+            <longitude>-77.5969</longitude>
+        </coordinate>
+        <station-type>road</station-type>
+    </header>
+    <roadlayer-list>
+        <roadlayer>
+            <position>1</position>
+            <type>cement</type>
+            <thickness>0.19</thickness>
+        </roadlayer>
+    </roadlayer-list>
+</station>

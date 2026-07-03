@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<forecast>
+  <header>
+    <version>1.1</version>
+    <production-date>2007-04-06T17:10Z</production-date>
+    <station-id>72469081</station-id>
+  </header>
+  <prediction-list>
+    <prediction>
+      <forecast-time>2007-04-08T08:00Z</forecast-time>
+      <at>0.22</at>
+      <td>-2.47</td>
+      <ra>0.00</ra>
+      <sn>3.40</sn>
+      <ws>2.25</ws>
+      <ap>786.10</ap>
+      <cc>8</cc>
+    </prediction>
+  </prediction-list>
+</forecast>

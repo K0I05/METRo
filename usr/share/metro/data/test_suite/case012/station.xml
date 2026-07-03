@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <filetype>rwis-configuration</filetype>
+    <version>1.0</version>
+    <road-station>oav</road-station>
+    <scribe-point>O45</scribe-point>
+    <time-zone>EST5EDT</time-zone>
+    <production-date>2005-03-23T20:32Z</production-date>
+    <coordinate>
+      <latitude>46.22347</latitude>
+      <longitude>-78.06786</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+    <nbrPuck>2</nbrPuck>
+    <puckForForecast>1</puckForForecast>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>beton</type>
+      <thickness>0.19</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station> 

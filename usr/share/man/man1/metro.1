@@ -1,6 +1,6 @@
 .TH metro 1
 .SH NAME
-metro \- METRo is a road weather forecast software from Environment Canada.
+metro \- METRo is a road weather forecast software from Environment and Climate change Canada.
 .SH SYNOPSIS
 .B metro
 [\fB\-\-config\fR \fIfilename\fR][\fB\-\-enable\-sunshadow \fR[\fB\-\-sunshadow\-method \fImethod\fR]\fR] [\fB\-\-help\fR]  [\fB\-\-fix-deep\-soil\-temperature \fItemperature\fR\] [\fB\-\-generate\-config\fR \fIfilename\fR] [\fB\-\-input\-forecast\fR \fIfilename\fR] [\fB\-\-input\-observation\fR \fIfilename\fR] [\fB\-\-input\-station\fR \fIfilename\fR] [\fB\-\-lang\fR \fI[fr|en]\fR] [\fB\-\-log\-file\fR \fIfilename\fR] [\fB\-\-output\-roadcast\fR \fIfilename\fR]  [\fB\-\-output-subsurface-levels\fR] [\fB\-\-roadcast-start-date\fR \fIdate\fR] [\fB\-\-selftest\fR] [\fB\-\-silent\fR] [\fB\-\-use\-anthropogenic\-flux\fR]  [\fB\-\-use\-infrared\-forecast\fR] [\fB\-\-use-sst-sensor-depth\fR] [\fB\-\-use\-solarflux\-forecast\fR] [\fB\-\-verbose\-level\fR \fIlevel\fR] [\fB\-\-version\fR]  
@@ -44,6 +44,9 @@ Choose the language of message for METRo.  Default is english. Only French is cu
 .TP
 .B \-\-log\-file filename
 Set the path of the metro log file.
+.TP
+.B \-\-output\-roadcast filename
+Choose the file name and path of the roadcast. Default value: file named "roadcast.xml" in the current working directory ($PWD).
 .TP
 .B \-\-output\-subsurface\-levels
 Optional.  Put in the output roadcast all the temperature for the subsurfaces levels, 19 levels for roads or a uniform grid at every cm for bridges. WARNING: Using this option slow down METRo by a factor of 2.
@@ -120,7 +123,7 @@ metro  \-\-input\-forecast forecast.xml \-\-input\-observation observation.xml \
 .SH AUTHOR
 Written by Miguel Tremblay, Francois Fortin, Yves Delage and Louis-Philippe Crevier.
 .SH COPYRIGHT
-COPYRIGHT \(co 2004, Service Meteorologique du Canada, Environnement Canada.  See documentation at https://framagit.org/metroprojects/metro/wikis/home for details. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2.
+COPYRIGHT \(co 2004, Service Meteorologique du Canada, Environnement and Climate change Canada.  See documentation at https://framagit.org/metroprojects/metro/wikis/home for details. Permission is granted to copy, distribute and/or modify this document under the terms of the GNU General Public License, Version 2.
 
 
 .SH REPORTING BUGS

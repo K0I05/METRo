@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <version>1.0</version>
+    <road-station>rya</road-station>
+    <time-zone>AST4ADT</time-zone>
+    <production-date>2003-09-26T15:34Z</production-date>
+    <coordinate>
+      <latitude>43.9847</latitude>
+      <longitude>-66.1222</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.1905</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>2</position>
+      <type>cement</type>
+      <thickness>0.4570</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station>

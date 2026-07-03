@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <filetype>rwis-configuration</filetype>
+    <version>1.0</version>
+    <road-station>71935001</road-station>
+    <time-zone>MST7MDT6</time-zone>
+    <production-date>2009-08-20T20:54Z</production-date>
+    <coordinate>
+      <latitude>59.87</latitude>
+      <longitude>-117.02</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.2032</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>2</position>
+      <type>cement</type>
+      <thickness>0.2540</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>3</position>
+      <type>crushed rock</type>
+      <thickness>0.2032</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station>
+

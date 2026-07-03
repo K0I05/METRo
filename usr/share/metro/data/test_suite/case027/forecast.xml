@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forecast>
+  <header>
+    <filetype>forecast</filetype>
+    <version>1.1</version>
+    <station_id>MICAP</station_id>
+    <production-date>2007-11-07T19:00Z</production-date>
+  </header>
+  <prediction-list>
+    <prediction>
+      <forecast-time viewed="no">2007-11-07T16:00Z</forecast-time>
+      <at>-1</at>
+      <td>-4</td>
+      <ra>0.00</ra>
+      <sn>0.30</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-07T17:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>0.60</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-07T18:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>1.00</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-07T19:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>1.40</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-07T20:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>1.80</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-07T21:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>2.10</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-07T22:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>2.40</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-07T23:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>2.70</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>80</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T00:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>2.80</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T01:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>2.90</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>821</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T02:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.00</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T03:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.10</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T04:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.20</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T05:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.30</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T06:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.50</sn>
+      <ws>3</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T07:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.70</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T08:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T09:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T10:00Z</forecast-time>
+      <at>-2</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T11:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T12:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T13:00Z</forecast-time>
+      <at>-3</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T14:00Z</forecast-time>
+      <at>-3</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T15:00Z</forecast-time>
+      <at>-3</at>
+      <td>-4</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>1</ws>
+      <cc>8</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T16:00Z</forecast-time>
+      <at>-3</at>
+      <td>-4</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>1</ws>
+      <cc>8</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T17:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>3.90</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>30</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T18:00Z</forecast-time>
+      <at>-1</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>4.00</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T19:00Z</forecast-time>
+      <at>0</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>4.10</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>823</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T20:00Z</forecast-time>
+      <at>0</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>4.20</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T21:00Z</forecast-time>
+      <at>1</at>
+      <td>-1</td>
+      <ra>0.00</ra>
+      <sn>4.40</sn>
+      <ws>2</ws>
+      <cc>8</cc>
+      <ap>822</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T22:00Z</forecast-time>
+      <at>1</at>
+      <td>-1</td>
+      <ra>0.00</ra>
+      <sn>4.60</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>822</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="yes">2007-11-08T23:00Z</forecast-time>
+      <at>0</at>
+      <td>-1</td>
+      <ra>0.00</ra>
+      <sn>4.80</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>821</ap>
+      <pp>70</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-09T00:00Z</forecast-time>
+      <at>0</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>4.90</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>821</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-09T01:00Z</forecast-time>
+      <at>-1</at>
+      <td>-2</td>
+      <ra>0.00</ra>
+      <sn>5.00</sn>
+      <ws>3</ws>
+      <cc>7</cc>
+      <ap>820</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-09T02:00Z</forecast-time>
+      <at>-2</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>5.10</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>820</ap>
+      <pp>60</pp>
+    </prediction>
+    <prediction>
+      <forecast-time viewed="no">2007-11-09T03:00Z</forecast-time>
+      <at>-3</at>
+      <td>-3</td>
+      <ra>0.00</ra>
+      <sn>5.40</sn>
+      <ws>2</ws>
+      <cc>7</cc>
+      <ap>819</ap>
+      <pp>80</pp>
+    </prediction>
+  </prediction-list>
+</forecast>

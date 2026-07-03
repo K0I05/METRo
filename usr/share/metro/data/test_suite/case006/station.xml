@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <filetype>station-configuration</filetype>
+    <version>1.0</version>
+    <road-station>oaq</road-station>
+    <scribe-point>NN8</scribe-point>
+    <time-zone>EST5EDT</time-zone>
+    <production-date>2004-11-23T16:19</production-date>
+    <coordinate>
+      <latitude>44.37804</latitude>
+      <longitude>-76.00755</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.1905</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station> 

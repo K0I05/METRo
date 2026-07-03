@@ -14,7 +14,6 @@
 #
 #  $LastChangedDate$
 #  $LastChangedRevision$
-#
 ########################################################################
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License as published by
@@ -45,7 +44,6 @@ installation_dir=`pwd`
 
 metro_dir=metro
 
-bCompile=1
 sVerbose=""
 
 # 'getopts' processes command line args to script.
@@ -66,11 +64,6 @@ then
     echo ""
     echo "Usage: $progname [OPTION] destination_path"
     echo ""
-    echo "-c  : Will compile the METRo physic model instead of using"
-    echo "      the provided binary. Need gfortran compiler."
-    echo "      DEPRECATED, no longer do anything, setup.sh will"
-    echo "      always compile the METRo physic model."
-    echo ""
     echo "-v  : Verbose"
     echo ""
     echo "The metro directory will be created in the destination_path"
@@ -78,22 +71,16 @@ then
     echo "Ex: ./setup.sh /usr/local/"
     echo "    ./setup.sh /home/user/program/"
     exit 0
-fi  
+fi
 
 
-while getopts "cv" Option
+while getopts "v" Option
 do
   case $Option in
-    c     ) bCompile=1;;
     v     ) sVerbose=-v;;
     *     ) echo ""
             echo "Usage: $progname [OPTION] destination_path"
             echo ""
-            echo "-c  : Will compile the METRo physic model instead of using"
-            echo "      the provided binary. Need gfortran compiler." 
-            echo "      DEPRECATED, no longer do anything, setup.sh will"
-            echo "      always compile the METRo physic model."
- 	    echo ""
 	    echo "-v  : Verbose"
             echo ""
             echo "The metro directory will be created in the destination_path"
@@ -110,6 +97,9 @@ shift $(($OPTIND - 1))
 
 destination_path=$1/$metro_dir
 
+#remove unnecessary slashes
+destination_path=$(echo ${destination_path} | sed s://*:/:g)
+
 echo "* Starting METRo Installation *"
 echo ""
 
@@ -125,42 +115,14 @@ if [ -d $destination_path ]; then
     fi
 fi
 
-# check if gfortran library exist on the target system
-echo "* Checking for libgfortran.so.1"
-if ! locate libgfortran.so.1; then
-    echo "----------------------------------------------------------"
-    echo "WARNING!"
-    echo "Could not find gfortran library on your system."
-    echo "METRo model will be recompiled."
-    echo "----------------------------------------------------------"
-    bCompile=1
-fi
-echo ""
-    
 mkdir -p $destination_path/usr/share/metro/model/
-mkdir -p $destination_path/usr/lib/metro/
-if [ $bCompile == 1 ]; then
-    echo "* Building physic model..."
-    if [ ! -n "$PYTHON_INCLUDE" ] ; then
-        echo "----------------------------------------------------------"
-        echo "WARNING!"
-        echo "No python path defined. setup.sh may not be able"
-        echo "to properly install METRo."
-        echo "Please set environment variable PYTHON_INCLUDE to your"
-        echo "python include directory."
-        echo "Ex: export PYTHON_INCLUDE=\"/usr/local/include/python2.3\""
-        echo "----------------------------------------------------------"
-	echo ""
-    fi
-    cd src/model
-    ../../scripts/do_macadam clean
-    ../../scripts/do_macadam $destination_path
-    cd $installation_dir
-#else
-#    echo "* Use provided binary for physic model"
-#    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
-#    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
-fi
+
+echo "* Building physic model..."
+cd src/model
+../../scripts/do_macadam clean
+../../scripts/do_macadam $destination_path
+cd $installation_dir
+
 echo ""
 
 echo "* Creating destination directory: "$destination_path
@@ -179,34 +141,19 @@ cp $sVerbose -r src/frontend/executable_module $destination_path/usr/share/metro
 cp $sVerbose -r src/frontend/external_lib $destination_path/usr/share/metro
 cp $sVerbose -r src/frontend/toolbox $destination_path/usr/share/metro
 
-#echo "* Copying METRo model python file to: "$destination_path/usr/share/metro/model
-#if [ $bCompile == 1 ]; then
-#    cp $sVerbose src/model/macadam.py          $destination_path/usr/share/metro/model/
-#else
-#    cp $sVerbose src/model/macadam.py.prebuilt $destination_path/usr/share/metro/model/macadam.py
-#fi
-
-#echo "* Copying METRo model to: "$destination_path/usr/lib/metro
-#if [ $bCompile == 1 ]; then
-#    cp $sVerbose src/model/_macadam.so $destination_path/usr/lib/metro/
-#else
-#    cp $sVerbose src/model/_macadam.so.prebuilt $destination_path/usr/lib/metro/_macadam.so
-#fi
-
 mkdir -p $destination_path/usr/share/doc/metro/
-echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro/
+echo "* Copying METRo doc files to: "$destination_path/usr/share/doc/metro
 cp $sVerbose INSTALL LICENSE README.md README.devel $destination_path/usr/share/doc/metro/
 
 echo "* Creating METRo log directory: "$destination_path/var/log
 mkdir -p $destination_path/var/log
-
 
 cd $installation_dir
 
 mkdir -p $destination_path/usr/bin
 echo "* Make link to METRo executable:"
 echo "  $destination_path/usr/bin/metro -> $destination_path/usr/share/metro/metro.py"
-ln -sf ../share/metro/metro.py $destination_path/usr/bin/metro  
+ln -sf ../share/metro/metro.py $destination_path/usr/bin/metro
 
 echo ""
 echo "---------------------------------------------------"
@@ -218,10 +165,10 @@ echo ""
 echo "To test the installation of METRo"
 echo "---------------------------------"
 echo "Go into the METRo directory:"
-echo " 'cd $destination_path/usr/bin/'" 
+echo " 'cd $destination_path/usr/bin/'"
 echo "Launch METRo selftest:"
-echo " 'python metro --selftest'"
+echo " 'python3 metro --selftest'"
 echo "Compare the files:"
-echo " 'diff ../share/metro/data/selftest/roadcast.xml ../share/metro/data/selftest/roadcast_reference.xml'"
-echo "They should be identical except for the production-date."
+echo " 'diff --ignore-matching-lines='.*<production-date>.*</production-date>' ../share/metro/data/selftest/roadcast.xml ../share/metro/data/selftest/roadcast_reference.xml'"
+echo "There shouldn't be any difference" 
 

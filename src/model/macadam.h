@@ -7,13 +7,13 @@
 **
 ** Date:        April 16, 2004
 **
-** Description: .h qui contient les constantes qui étaient autrefois dans 
-**  params.cdk.  L'allocation dynamique étant impossible à faire avec un 
-**  pointeur créé en C et passé au Fortran, l'utilisation de constante comme
-**  DTMAX doit être maintenu.
+** Description: .h qui contient les constantes qui etaient autrefois dans 
+**  params.cdk.  L'allocation dynamique etant impossible a faire avec un 
+**  pointeur cree en C et passe au Fortran, l'utilisation de constante comme
+**  DTMAX doit etre maintenu.
 **
-** TODO: Enlever les constantes à mesure que le code fortran les utilisant
-**  est remplacé par du code en C.
+** TODO: Enlever les constantes a mesure que le code fortran les utilisant
+**  est remplace par du code en C.
 **
 ****************************************************************************/
 
@@ -23,7 +23,7 @@
 #define TRUE 1
 #define FALSE 0
 
-/* Pas de temps du modèle de bilan énergétique */
+/* Pas de temps du modele de bilan energetique */
 /* Model time step in second for the energy balance */
 #define dDT 30.0
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<station>
+  <header>
+    <version>1.0</version>
+    <road-station>825</road-station>
+    <time-zone>MSK3MSK</time-zone>
+    <production-date>2016-12-12T10:05</production-date>
+    <coordinate>
+      <latitude>64.2233333333</latitude>
+      <longitude>41.2091666667</longitude>
+    </coordinate>
+    <station-type>road</station-type>
+    <sst-sensor-depth>0.04</sst-sensor-depth>
+  </header>
+  <roadlayer-list>
+    <roadlayer>
+      <position>1</position>
+      <type>asphalt</type>
+      <thickness>0.2</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>2</position>
+      <type>cement</type>
+      <thickness>0.3</thickness>
+    </roadlayer>
+    <roadlayer>
+      <position>3</position>
+      <type>crushed rock</type>
+      <thickness>0.3</thickness>
+    </roadlayer>
+  </roadlayer-list>
+</station>

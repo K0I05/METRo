@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<observation>
+  <header>
+    <filetype>rwis-observation</filetype>
+    <version>1.0</version>
+    <road-station>46094</road-station>
+  </header>
+  <measure-list>
+    <measure>
+      <observation-time>2007-11-08T10:00:00Z</observation-time>
+      <at>2.44</at>
+      <td>2.44</td>
+      <pi>1</pi>
+      <ws>8</ws>
+      <sc>34</sc>
+      <st>1.90</st>
+      <sst>3.60</sst>
+    </measure>
+    <measure>
+      <observation-time>2007-11-08T15:00:00Z</observation-time>
+      <at>1.52</at>
+      <td>1.52</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc>34</sc>
+      <st>2.00</st>
+      <sst>3.54</sst>
+    </measure>
+    <measure>
+      <observation-time>2007-11-08T16:00:00Z</observation-time>
+      <at>1.56</at>
+      <td>1.56</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc>34</sc>
+      <st>2.10</st>
+      <sst>3.56</sst>
+    </measure>
+  </measure-list>
+</observation>

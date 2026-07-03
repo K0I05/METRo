@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<observation>
+  <header>
+    <version>1.0</version>
+    <road-station>QC-MTQ-CR5000_5</road-station>
+    <filetype>observation</filetype>
+  </header>
+  <measure-list>
+    <measure>
+      <observation-time>2005-10-13T08:10Z</observation-time>
+      <at>7.51</at>
+      <td>4.22</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>9.22</st>
+      <sst>13.75</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T08:20Z</observation-time>
+      <at>7.32</at>
+      <td>4.25</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc status="missing"/>
+      <st>9.18</st>
+      <sst>13.74</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T08:30Z</observation-time>
+      <at>7.28</at>
+      <td>4.17</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>9.14</st>
+      <sst>13.73</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T08:40Z</observation-time>
+      <at>7.24</at>
+      <td>4.17</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc status="missing"/>
+      <st>9.06</st>
+      <sst>13.71</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T08:50Z</observation-time>
+      <at>7.26</at>
+      <td>4.11</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>8.96</st>
+      <sst>13.70</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:00Z</observation-time>
+      <at>7.30</at>
+      <td>4.03</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>8.85</st>
+      <sst>13.69</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:10Z</observation-time>
+      <at>7.34</at>
+      <td>4.04</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>8.81</st>
+      <sst>13.68</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:20Z</observation-time>
+      <at>7.37</at>
+      <td>4.05</td>
+      <pi>0</pi>
+      <ws>6</ws>
+      <sc status="missing"/>
+      <st>8.76</st>
+      <sst>13.66</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:30Z</observation-time>
+      <at>7.39</at>
+      <td>4.03</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>8.69</st>
+      <sst>13.65</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:40Z</observation-time>
+      <at>7.33</at>
+      <td>4.03</td>
+      <pi>0</pi>
+      <ws>6</ws>
+      <sc status="missing"/>
+      <st>8.60</st>
+      <sst>13.64</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T09:50Z</observation-time>
+      <at>7.06</at>
+      <td>3.98</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc status="missing"/>
+      <st>8.55</st>
+      <sst>13.62</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:00Z</observation-time>
+      <at>6.99</at>
+      <td>3.98</td>
+      <pi>0</pi>
+      <ws>2</ws>
+      <sc status="missing"/>
+      <st>8.57</st>
+      <sst>13.60</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:10Z</observation-time>
+      <at>6.98</at>
+      <td>4.03</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>8.62</st>
+      <sst>13.59</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:20Z</observation-time>
+      <at>6.80</at>
+      <td>3.99</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>8.56</st>
+      <sst>13.58</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:30Z</observation-time>
+      <at>6.61</at>
+      <td>3.97</td>
+      <pi>0</pi>
+      <ws>2</ws>
+      <sc status="missing"/>
+      <st>8.42</st>
+      <sst>13.56</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:40Z</observation-time>
+      <at>6.66</at>
+      <td>3.94</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>8.28</st>
+      <sst>13.54</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T10:50Z</observation-time>
+      <at>6.64</at>
+      <td>3.99</td>
+      <pi>0</pi>
+      <ws>0</ws>
+      <sc status="missing"/>
+      <st>8.24</st>
+      <sst>13.53</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:00Z</observation-time>
+      <at>6.67</at>
+      <td>3.98</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>8.28</st>
+      <sst>13.51</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:10Z</observation-time>
+      <at>6.84</at>
+      <td>4.00</td>
+      <pi>0</pi>
+      <ws>6</ws>
+      <sc status="missing"/>
+      <st>8.44</st>
+      <sst>13.50</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:20Z</observation-time>
+      <at>7.10</at>
+      <td>4.06</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>8.74</st>
+      <sst>13.48</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:30Z</observation-time>
+      <at>7.39</at>
+      <td>4.24</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>9.09</st>
+      <sst>13.47</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:40Z</observation-time>
+      <at>7.67</at>
+      <td>4.35</td>
+      <pi>0</pi>
+      <ws>2</ws>
+      <sc status="missing"/>
+      <st>9.38</st>
+      <sst>13.45</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T11:50Z</observation-time>
+      <at>7.67</at>
+      <td>4.30</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>9.52</st>
+      <sst>13.43</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:00Z</observation-time>
+      <at>7.77</at>
+      <td>4.37</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>9.71</st>
+      <sst>13.42</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:10Z</observation-time>
+      <at>8.01</at>
+      <td>4.49</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>10.00</st>
+      <sst>13.39</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:20Z</observation-time>
+      <at>8.24</at>
+      <td>4.48</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc status="missing"/>
+      <st>10.29</st>
+      <sst>13.38</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:30Z</observation-time>
+      <at>8.27</at>
+      <td>4.62</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>10.45</st>
+      <sst>13.36</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:40Z</observation-time>
+      <at>8.57</at>
+      <td>4.89</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>10.73</st>
+      <sst>13.34</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T12:50Z</observation-time>
+      <at>8.99</at>
+      <td>4.97</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>11.42</st>
+      <sst>13.32</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:00Z</observation-time>
+      <at>9.44</at>
+      <td>5.08</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>11.97</st>
+      <sst>13.31</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:10Z</observation-time>
+      <at>10.00</at>
+      <td>5.32</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>12.69</st>
+      <sst>13.29</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:20Z</observation-time>
+      <at>10.45</at>
+      <td>5.45</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>13.51</st>
+      <sst>13.27</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:30Z</observation-time>
+      <at>10.93</at>
+      <td>5.78</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>14.22</st>
+      <sst>13.25</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:40Z</observation-time>
+      <at>11.48</at>
+      <td>5.72</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>15.16</st>
+      <sst>13.24</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T13:50Z</observation-time>
+      <at>11.94</at>
+      <td>5.57</td>
+      <pi>0</pi>
+      <ws>16</ws>
+      <sc status="missing"/>
+      <st>16.17</st>
+      <sst>13.22</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:00Z</observation-time>
+      <at>11.53</at>
+      <td>5.27</td>
+      <pi>0</pi>
+      <ws>17</ws>
+      <sc status="missing"/>
+      <st>16.15</st>
+      <sst>13.20</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:10Z</observation-time>
+      <at>11.52</at>
+      <td>5.38</td>
+      <pi>0</pi>
+      <ws>11</ws>
+      <sc status="missing"/>
+      <st>15.88</st>
+      <sst>13.19</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:20Z</observation-time>
+      <at>11.56</at>
+      <td>5.42</td>
+      <pi>0</pi>
+      <ws>13</ws>
+      <sc status="missing"/>
+      <st>15.94</st>
+      <sst>13.17</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:30Z</observation-time>
+      <at>11.65</at>
+      <td>5.48</td>
+      <pi>0</pi>
+      <ws>15</ws>
+      <sc status="missing"/>
+      <st>16.09</st>
+      <sst>13.16</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:40Z</observation-time>
+      <at>12.02</at>
+      <td>5.62</td>
+      <pi>0</pi>
+      <ws>14</ws>
+      <sc status="missing"/>
+      <st>16.36</st>
+      <sst>13.14</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T14:50Z</observation-time>
+      <at>12.38</at>
+      <td>5.55</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>16.92</st>
+      <sst>13.13</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:00Z</observation-time>
+      <at>12.08</at>
+      <td>5.27</td>
+      <pi>0</pi>
+      <ws>13</ws>
+      <sc status="missing"/>
+      <st>16.62</st>
+      <sst>13.12</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:10Z</observation-time>
+      <at>12.29</at>
+      <td>5.35</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>16.47</st>
+      <sst>13.11</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:20Z</observation-time>
+      <at>12.47</at>
+      <td>5.57</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>16.78</st>
+      <sst>13.10</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:30Z</observation-time>
+      <at>12.72</at>
+      <td>5.32</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>17.18</st>
+      <sst>13.09</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:40Z</observation-time>
+      <at>12.78</at>
+      <td>5.29</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>17.27</st>
+      <sst>13.09</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T15:50Z</observation-time>
+      <at>12.93</at>
+      <td>5.52</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>17.12</st>
+      <sst>13.08</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:00Z</observation-time>
+      <at>13.03</at>
+      <td>5.06</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>17.31</st>
+      <sst>13.08</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:10Z</observation-time>
+      <at>12.97</at>
+      <td>5.12</td>
+      <pi>0</pi>
+      <ws>14</ws>
+      <sc status="missing"/>
+      <st>17.40</st>
+      <sst>13.08</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:20Z</observation-time>
+      <at>13.21</at>
+      <td>5.27</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>17.62</st>
+      <sst>13.09</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:30Z</observation-time>
+      <at>13.06</at>
+      <td>5.40</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>17.44</st>
+      <sst>13.09</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:40Z</observation-time>
+      <at>13.11</at>
+      <td>5.37</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>17.28</st>
+      <sst>13.09</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T16:50Z</observation-time>
+      <at>13.31</at>
+      <td>5.44</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>17.37</st>
+      <sst>13.10</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:00Z</observation-time>
+      <at>13.79</at>
+      <td>5.60</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>17.96</st>
+      <sst>13.11</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:10Z</observation-time>
+      <at>13.89</at>
+      <td>6.13</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>18.37</st>
+      <sst>13.12</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:20Z</observation-time>
+      <at>13.79</at>
+      <td>5.89</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>18.35</st>
+      <sst>13.13</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:30Z</observation-time>
+      <at>13.41</at>
+      <td>6.23</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>18.17</st>
+      <sst>13.14</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:40Z</observation-time>
+      <at>13.33</at>
+      <td>6.44</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>17.99</st>
+      <sst>13.16</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T17:50Z</observation-time>
+      <at>13.28</at>
+      <td>6.10</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>17.98</st>
+      <sst>13.17</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:00Z</observation-time>
+      <at>13.36</at>
+      <td>6.23</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>17.94</st>
+      <sst>13.19</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:10Z</observation-time>
+      <at>13.33</at>
+      <td>6.43</td>
+      <pi>0</pi>
+      <ws>12</ws>
+      <sc status="missing"/>
+      <st>17.90</st>
+      <sst>13.21</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:20Z</observation-time>
+      <at>13.74</at>
+      <td>6.63</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc status="missing"/>
+      <st>18.26</st>
+      <sst>13.22</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:30Z</observation-time>
+      <at>13.87</at>
+      <td>6.98</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc status="missing"/>
+      <st>18.39</st>
+      <sst>13.24</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:40Z</observation-time>
+      <at>13.73</at>
+      <td>6.69</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>18.45</st>
+      <sst>13.26</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T18:50Z</observation-time>
+      <at>13.81</at>
+      <td>6.67</td>
+      <pi>0</pi>
+      <ws>8</ws>
+      <sc status="missing"/>
+      <st>18.40</st>
+      <sst>13.28</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:00Z</observation-time>
+      <at>13.92</at>
+      <td>6.69</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>18.25</st>
+      <sst>13.30</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:10Z</observation-time>
+      <at>13.95</at>
+      <td>6.88</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>18.17</st>
+      <sst>13.33</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:20Z</observation-time>
+      <at>13.95</at>
+      <td>7.26</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>17.99</st>
+      <sst>13.35</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:30Z</observation-time>
+      <at>13.75</at>
+      <td>6.91</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>17.80</st>
+      <sst>13.37</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:40Z</observation-time>
+      <at>13.72</at>
+      <td>7.09</td>
+      <pi>0</pi>
+      <ws>10</ws>
+      <sc status="missing"/>
+      <st>17.59</st>
+      <sst>13.40</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T19:50Z</observation-time>
+      <at>13.75</at>
+      <td>7.17</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>17.46</st>
+      <sst>13.42</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:00Z</observation-time>
+      <at>13.64</at>
+      <td>7.41</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>17.27</st>
+      <sst>13.45</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:10Z</observation-time>
+      <at>13.54</at>
+      <td>7.36</td>
+      <pi>0</pi>
+      <ws>7</ws>
+      <sc status="missing"/>
+      <st>17.04</st>
+      <sst>13.47</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:20Z</observation-time>
+      <at>13.47</at>
+      <td>7.40</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>16.91</st>
+      <sst>13.50</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:30Z</observation-time>
+      <at>13.42</at>
+      <td>7.45</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>16.81</st>
+      <sst>13.52</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:40Z</observation-time>
+      <at>13.30</at>
+      <td>7.51</td>
+      <pi>4</pi>
+      <ws>2</ws>
+      <sc status="missing"/>
+      <st>16.60</st>
+      <sst>13.55</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T20:50Z</observation-time>
+      <at>13.17</at>
+      <td>7.75</td>
+      <pi>4</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>16.32</st>
+      <sst>13.57</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:00Z</observation-time>
+      <at>13.07</at>
+      <td>7.63</td>
+      <pi>4</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>16.08</st>
+      <sst>13.60</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:10Z</observation-time>
+      <at>12.95</at>
+      <td>7.76</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>15.85</st>
+      <sst>13.63</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:20Z</observation-time>
+      <at>12.85</at>
+      <td>7.77</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>15.62</st>
+      <sst>13.65</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:30Z</observation-time>
+      <at>12.74</at>
+      <td>7.88</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>15.45</st>
+      <sst>13.68</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:40Z</observation-time>
+      <at>12.61</at>
+      <td>7.89</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>15.24</st>
+      <sst>13.70</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T21:50Z</observation-time>
+      <at>12.43</at>
+      <td>7.92</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>15.00</st>
+      <sst>13.73</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:00Z</observation-time>
+      <at>12.30</at>
+      <td>7.93</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>14.81</st>
+      <sst>13.76</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:10Z</observation-time>
+      <at>12.18</at>
+      <td>7.85</td>
+      <pi>0</pi>
+      <ws>6</ws>
+      <sc status="missing"/>
+      <st>14.62</st>
+      <sst>13.78</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:20Z</observation-time>
+      <at>12.05</at>
+      <td>7.91</td>
+      <pi>0</pi>
+      <ws>3</ws>
+      <sc status="missing"/>
+      <st>14.44</st>
+      <sst>13.80</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:30Z</observation-time>
+      <at>11.96</at>
+      <td>7.96</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>14.29</st>
+      <sst>13.83</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:40Z</observation-time>
+      <at>11.85</at>
+      <td>7.84</td>
+      <pi>0</pi>
+      <ws>9</ws>
+      <sc status="missing"/>
+      <st>14.16</st>
+      <sst>13.85</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T22:50Z</observation-time>
+      <at>11.72</at>
+      <td>7.87</td>
+      <pi>0</pi>
+      <ws>2</ws>
+      <sc status="missing"/>
+      <st>14.02</st>
+      <sst>13.88</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:00Z</observation-time>
+      <at>11.61</at>
+      <td>7.84</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>13.90</st>
+      <sst>13.90</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:10Z</observation-time>
+      <at>11.48</at>
+      <td>7.81</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>13.78</st>
+      <sst>13.92</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:20Z</observation-time>
+      <at>11.40</at>
+      <td>7.81</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>13.67</st>
+      <sst>13.94</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:30Z</observation-time>
+      <at>11.35</at>
+      <td>7.84</td>
+      <pi>0</pi>
+      <ws>4</ws>
+      <sc status="missing"/>
+      <st>13.57</st>
+      <sst>13.96</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:40Z</observation-time>
+      <at>11.26</at>
+      <td>7.86</td>
+      <pi>0</pi>
+      <ws>1</ws>
+      <sc status="missing"/>
+      <st>13.47</st>
+      <sst>13.98</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-13T23:50Z</observation-time>
+      <at>11.19</at>
+      <td>7.87</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>13.38</st>
+      <sst>13.99</sst>
+    </measure>
+    <measure>
+      <observation-time>2005-10-14T00:00Z</observation-time>
+      <at>11.15</at>
+      <td>7.87</td>
+      <pi>0</pi>
+      <ws>5</ws>
+      <sc status="missing"/>
+      <st>13.30</st>
+      <sst>14.01</sst>
+    </measure>
+  </measure-list>
+</observation>
