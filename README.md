@@ -2,10 +2,10 @@
 
 METRo stands for "Model of the Environment and Temperature of Roads".
 It is a road weather forecast software. With the help of observations 
-provided by roadside weather stations in the Road Weather Information System (RWIS)
+provided by roadside weather stations from the Road Weather Information System (RWIS)
 network and a site specific atmospheric forecast, METRo can, amongst other things, 
 predict the roads conditions with particular interest such as: freezing rain, 
-accumulation of snow, frost and thaw. 
+accumulation of snow, frost and thaw.
 
 METRo is Free under the terms of the GPL license and is proudly provided by Environment Canada, Government of Canada.
 Copyright (C) 2006 Environment Canada
@@ -19,6 +19,7 @@ canadien (CMC), Montréal, Québec.
 METRo is mainly written in python but also use fortran and C (to link the python 
 and the fortran). 
 
+This is an enhanced clone of the original METRo repo hosted on framagit. See the readme for developers on features added and improvements such as unit-testing. 
 
 ## Documentation 
 
